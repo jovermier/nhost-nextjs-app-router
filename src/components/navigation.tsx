@@ -1,7 +1,7 @@
-import { signOut } from "@server-actions/auth";
-import Link from "next/link";
-import { getNhost } from "../utils/nhost";
-import SignOut from "./sign-out";
+import { signOut } from '@server-actions/auth';
+import Link from 'next/link';
+import { getNhost } from '../utils/nhost';
+import SignOut from './sign-out';
 
 export default async function Navigation() {
   const nhost = await getNhost();
@@ -9,28 +9,32 @@ export default async function Navigation() {
 
   const nav = [
     {
-      href: "/",
-      name: "Home",
+      href: '/',
+      name: 'Home',
     },
     {
-      href: "/protected/session",
-      name: `${user ? "🔓" : "🔒"} Session`,
+      href: '/protected/session',
+      name: `${user ? '🔓' : '🔒'} Session`,
     },
     {
-      href: "/protected/claims",
-      name: `${user ? "🔓" : "🔒"} Claims`,
+      href: '/protected/claims',
+      name: `${user ? '🔓' : '🔒'} Claims`,
     },
     {
-      href: "/protected/todos",
-      name: `${user ? "🔓" : "🔒"} Todos`,
+      href: '/protected/todos',
+      name: `${user ? '🔓' : '🔒'} Todos`,
     },
     {
-      href: "/protected/echo",
-      name: `${user ? "🔓" : "🔒"} Echo`,
+      href: '/protected/todos2',
+      name: `${user ? '🔓' : '🔒'} Todos2`,
     },
     {
-      href: "/protected/pat",
-      name: `${user ? "🔓" : "🔒"} PAT`,
+      href: '/protected/echo',
+      name: `${user ? '🔓' : '🔒'} Echo`,
+    },
+    {
+      href: '/protected/pat',
+      name: `${user ? '🔓' : '🔒'} PAT`,
     },
   ];
 

@@ -1,27 +1,26 @@
-import { gql } from '@apollo/client'
-import PatItem, { type PAT } from '@components/pat-item'
-import withAuthAsync from '@utils/auth-guard'
-import { getNhost } from '@utils/nhost'
-import Head from 'next/head'
-import Link from 'next/link'
+import { gql } from '@apollo/client';
+import PatItem, { type PAT } from '@components/pat-item';
+import withAuthAsync from '@utils/auth-guard';
+import { getNhost } from '@utils/nhost';
+import Link from 'next/link';
 
 const PATs = async ({
-  params
+  params,
 }: {
   params: {
-    [key: string]: string | string[] | undefined
-  }
+    [key: string]: string | string[] | undefined;
+  };
 }) => {
-  const page = parseInt(params.pagination?.at(0) || '0')
-  const nhost = await getNhost()
+  const page = parseInt(params.pagination?.at(0) || '0');
+  const nhost = await getNhost();
 
   const {
     data: {
       authRefreshTokens,
       authRefreshTokensAggregate: {
-        aggregate: { count }
-      }
-    }
+        aggregate: { count },
+      },
+    },
   } = await nhost.graphql.request(
     gql`
       query getPersonalAccessTokens($offset: Int, $limit: Int) {
@@ -46,16 +45,12 @@ const PATs = async ({
     `,
     {
       offset: page * 10,
-      limit: 10
-    }
-  )
+      limit: 10,
+    },
+  );
 
   return (
     <div className="flex flex-col space-y-4">
-      <Head>
-        <title>Personal Access Tokens</title>
-      </Head>
-
       <div className="flex items-center justify-between w-full">
         <h2 className="text-xl">Personal Access Tokens ({count})</h2>
 
@@ -97,7 +92,7 @@ const PATs = async ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default withAuthAsync(PATs)
+export default withAuthAsync(PATs);

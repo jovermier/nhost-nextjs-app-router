@@ -1,23 +1,22 @@
-import { gql } from '@apollo/client'
-import TodoItem, { type Todo } from '@components/todo-item'
-import withAuthAsync from '@utils/auth-guard'
-import { getNhost } from '@utils/nhost'
+import { gql } from '@apollo/client';
+import TodoItem, { type Todo } from '@components/todo-item';
+import withAuthAsync from '@utils/auth-guard';
+import { getNhost } from '@utils/nhost';
 
-import Head from 'next/head'
-import Link from 'next/link'
+import Link from 'next/link';
 
 const Todos = async ({ params }: { params: { [key: string]: string | string[] | undefined } }) => {
-  const page = parseInt(params.pagination?.at(0) || '0')
+  const page = parseInt(params.pagination?.at(0) || '0');
 
-  const nhost = await getNhost()
+  const nhost = await getNhost();
 
   const {
     data: {
       todos,
       todos_aggregate: {
-        aggregate: { count }
-      }
-    }
+        aggregate: { count },
+      },
+    },
   } = await nhost.graphql.request(
     gql`
       query getTodos($limit: Int, $offset: Int) {
@@ -39,16 +38,12 @@ const Todos = async ({ params }: { params: { [key: string]: string | string[] | 
     `,
     {
       offset: page * 10,
-      limit: 10
-    }
-  )
+      limit: 10,
+    },
+  );
 
   return (
     <div className="space-y-4">
-      <Head>
-        <title>Protected Page</title>
-      </Head>
-
       <div className="flex items-center justify-between w-full">
         <h2 className="text-xl">Todos ({count})</h2>
 
@@ -90,7 +85,7 @@ const Todos = async ({ params }: { params: { [key: string]: string | string[] | 
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default withAuthAsync(Todos)
+export default withAuthAsync(Todos);
