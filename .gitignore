@@ -11,6 +11,7 @@
 # next.js
 /.next/
 /out/
+/.turbo/
 
 # production
 /build
@@ -34,5 +35,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# nhost
 .secrets
 .nhost
