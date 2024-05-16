@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const TodosSSRQueryDocument = gql`
+export const TodosQueryDocument = gql`
   query getTodos($limit: Int, $offset: Int) {
     todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
       id
@@ -14,19 +14,6 @@ export const TodosSSRQueryDocument = gql`
     todos_aggregate {
       aggregate {
         count
-      }
-    }
-  }
-`;
-
-export const TodosQueryDocument = gql`
-  query getTodos($limit: Int, $offset: Int) {
-    todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
-      id
-      title
-      done
-      attachment {
-        id
       }
     }
   }

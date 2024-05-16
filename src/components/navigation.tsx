@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 import { signOut } from '@server-actions/auth';
-import Link from 'next/link';
 import { getNhost } from '../utils/nhost';
 
 const SignOut = dynamic(() => import('./sign-out'), {

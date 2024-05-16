@@ -1,25 +1,14 @@
 'use client';
 
-import { useQuery, useSubscription } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 import TodoItem, { Todo } from '@components/todo-item';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useRef } from 'react';
-import {
-  TodosCountSubscriptionDocument,
-  TodosQueryDocument,
-  TodosSubscriptionDocument,
-} from './documentNodes';
+import { TodosQueryDocument } from './documentNodes';
 
 const TodosCSR = () => {
   const pageString = useSearchParams().get('page');
   const page = pageString ? parseInt(pageString) : 0;
-
-  const countRes = useSubscription(TodosCountSubscriptionDocument, {
-    fetchPolicy: 'cache-first',
-    shouldResubscribe: false,
-  });
-  const count = countRes.data?.todos_aggregate?.aggregate?.count;
 
   const queryRes = useQuery(TodosQueryDocument, {
     variables: {
@@ -27,45 +16,15 @@ const TodosCSR = () => {
       limit: 10,
     },
   });
-  const subRes = useSubscription(TodosSubscriptionDocument, {
-    variables: {
-      offset: page * 10,
-      limit: 10,
-    },
-    fetchPolicy: 'cache-first',
-    shouldResubscribe: false,
-  });
 
-  const dataRef = useRef(() => subRes.data);
-  useEffect(() => {
-    if (subRes.data !== dataRef.current) {
-      dataRef.current = subRes.data;
-      console.log('Subscription data change');
-    }
-  }, [subRes.data]);
+  const count = queryRes.data?.todos_aggregate?.aggregate?.count;
 
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl">CSR Todos ({count ?? '-'})</h2>
-
-        <Link
-          href={`/protected/todos/new-client-side`}
-          className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-        >
-          Add Todo (Client Mutation)
-        </Link>
+        <h2 className="text-xl">CSR Todos Query</h2>
+        <span className="text-xl">({count ?? '-'})</span>
       </div>
-
-      <h3 className="text-lg font-semibold pt-8">Subscription</h3>
-      <ul className="space-y-1">
-        {subRes.data?.todos?.map((todo: Todo) => (
-          <li key={todo.id}>
-            <TodoItem todo={todo} />
-          </li>
-        ))}
-        {subRes.loading && <li>Subscription Loading...</li>}
-      </ul>
 
       <div className="flex flex-row justify-between pt-8">
         <h3 className="text-lg font-semibold">Query</h3>
@@ -73,7 +32,7 @@ const TodosCSR = () => {
           onClick={() => queryRes.refetch()}
           className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
         >
-          Refresh
+          Query Refresh
         </button>
       </div>
 

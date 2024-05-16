@@ -6,8 +6,7 @@ import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { type StateFrom } from 'xstate/lib/types';
 import { waitFor } from 'xstate/lib/waitFor';
-
-export const NHOST_SESSION_KEY = 'nhostSession';
+import { NHOST_SESSION_KEY } from './nhost-constants';
 
 export const getNhost = async (request?: NextRequest) => {
   const $cookies = request?.cookies || cookies();
@@ -19,7 +18,11 @@ export const getNhost = async (request?: NextRequest) => {
   });
 
   const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY)?.value || '';
-  const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) || 'null');
+  // const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) || 'null');
+  const initialSession: NhostSession =
+    sessionCookieValue[0] === '{'
+      ? (JSON.parse(sessionCookieValue) as NhostSession)
+      : (JSON.parse(atob(sessionCookieValue) || 'null') as NhostSession);
 
   nhost.auth.client.start({ initialSession });
   await waitFor(

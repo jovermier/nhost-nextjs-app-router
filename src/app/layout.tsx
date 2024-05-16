@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import '~/styles/globals.css';
-import NhostClientProvider from '@components/NhostClientProvider';
+// import NhostClientProvider from '@components/NhostReactClientProvider';
+import NhostClientProvider from '@components/NhostNextClientProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 

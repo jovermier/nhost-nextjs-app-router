@@ -3,7 +3,8 @@ import Link from 'next/link';
 import TodoItem, { type Todo } from '@components/todo-item';
 import withAuthAsync from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
-import { TodosSSRQueryDocument } from './documentNodes';
+import { TodosQueryDocument } from './documentNodes';
+import { RouteRefreshButton } from './RouteRefreshButton';
 
 const TodosSSR = async ({
   params,
@@ -21,7 +22,7 @@ const TodosSSR = async ({
         aggregate: { count },
       },
     },
-  } = await nhost.graphql.request(TodosSSRQueryDocument, {
+  } = await nhost.graphql.request(TodosQueryDocument, {
     offset: page * 10,
     limit: 10,
   });
@@ -29,13 +30,13 @@ const TodosSSR = async ({
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl">SSR Todos ({count})</h2>
-        <Link
-          href={`/protected/todos/new-server-action`}
-          className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
-        >
-          Add Todo (Server Action)
-        </Link>
+        <h2 className="text-xl">SSR Todos</h2>
+        <span className="text-xl">({count ?? '-'})</span>
+      </div>
+
+      <div className="flex flex-row justify-between pt-8">
+        <h3 className="text-lg font-semibold">Server Side Query</h3>
+        <RouteRefreshButton />
       </div>
 
       <ul className="pt-2">

@@ -1,41 +1,40 @@
-'use client'
+'use client';
 
-import Input from '@components/input'
-import SubmitButton from '@components/submit-button'
-import { NhostClient } from '@nhost/nhost-js'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/navigation'
-import { useState, type FormEvent } from 'react'
-
-const NHOST_SESSION_KEY = 'nhostSession'
+import Input from '@components/input';
+import SubmitButton from '@components/submit-button';
+import { NhostClient } from '@nhost/nhost-js';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { useState, type FormEvent } from 'react';
+import { NHOST_SESSION_KEY } from '~/utils/nhost-constants';
 
 const nhost = new NhostClient({
   subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'local',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION
-})
+  region: process.env.NEXT_PUBLIC_NHOST_REGION,
+});
 
 export default function SignInWithSecurityKey() {
-  const router = useRouter()
-  const [error, setError] = useState('')
-  const [email, setEmail] = useState('')
+  const router = useRouter();
+  const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleSignIn = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
     const { session, error } = await nhost.auth.signIn({
       email,
-      securityKey: true
-    })
+      securityKey: true,
+    });
 
     if (error) {
-      setError(error.message)
+      setError(error.message);
     }
 
     if (session) {
-      Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' })
-      router.push('/protected/todos')
+      Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
+      router.push('/protected/todos');
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -58,5 +57,5 @@ export default function SignInWithSecurityKey() {
         </SubmitButton>
       </form>
     </div>
-  )
+  );
 }
