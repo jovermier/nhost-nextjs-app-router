@@ -32,7 +32,7 @@ export default function TodoForm() {
         if (res.errors) {
           console.log(res.errors);
         } else {
-          router.push('/protected/todos2');
+          router.push('/protected/todos');
         }
       });
     },

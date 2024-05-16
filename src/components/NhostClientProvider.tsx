@@ -9,7 +9,7 @@ import { waitFor } from 'xstate/lib/waitFor';
 
 const NHOST_SESSION_KEY = 'nhostSession';
 
-export const getClientNhost = async () => {
+export const getClientNhost = () => {
   const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)! as string;
 
   const nhost = new NhostClient({
@@ -25,31 +25,17 @@ export const getClientNhost = async () => {
 
     nhost.auth.client.start({ initialSession: serverSession });
 
-    await waitFor(
-      nhost.auth.client.interpreter!,
-      (state: StateFrom<any>) => !state.hasTag('loading'),
-    );
+    // await waitFor(
+    //   nhost.auth.client.interpreter!,
+    //   (state: StateFrom<any>) => !state.hasTag('loading'),
+    // );
   }
 
   return nhost;
 };
 
 export function NhostClientProvider({ children }: { children: React.ReactNode }) {
-  const [nhostClientInstance, setNhostClientInstance] = useState<NhostClient | null>(null);
-
-  useEffect(() => {
-    getClientNhost()
-      .then((nhostClientInstance) => {
-        setNhostClientInstance(nhostClientInstance);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
-
-  if (!nhostClientInstance) {
-    return null;
-  }
+  const [nhostClientInstance, setNhostClientInstance] = useState(() => getClientNhost());
 
   return (
     <NhostProvider nhost={nhostClientInstance}>

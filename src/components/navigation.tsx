@@ -1,7 +1,12 @@
+import dynamic from 'next/dynamic';
+
 import { signOut } from '@server-actions/auth';
 import Link from 'next/link';
 import { getNhost } from '../utils/nhost';
-import SignOut from './sign-out';
+
+const SignOut = dynamic(() => import('./sign-out'), {
+  ssr: false,
+});
 
 export default async function Navigation() {
   const nhost = await getNhost();
@@ -17,16 +22,8 @@ export default async function Navigation() {
       name: `${user ? '🔓' : '🔒'} Session`,
     },
     {
-      href: '/protected/claims',
-      name: `${user ? '🔓' : '🔒'} Claims`,
-    },
-    {
       href: '/protected/todos',
       name: `${user ? '🔓' : '🔒'} Todos`,
-    },
-    {
-      href: '/protected/todos2',
-      name: `${user ? '🔓' : '🔒'} Todos2`,
     },
     {
       href: '/protected/echo',

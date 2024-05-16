@@ -1,4 +1,4 @@
-import 'server-only';
+// import 'server-only';
 
 import { AuthErrorPayload, NhostClient, NhostSession } from '@nhost/nhost-js';
 import { cookies } from 'next/headers';

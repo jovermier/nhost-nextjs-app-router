@@ -1,48 +1,17 @@
 'use client';
 
-import { gql, useQuery, useSubscription } from '@apollo/client';
+import { useQuery, useSubscription } from '@apollo/client';
 import Link from 'next/link';
 import TodoItem, { Todo } from '@components/todo-item';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import {
+  TodosCountSubscriptionDocument,
+  TodosQueryDocument,
+  TodosSubscriptionDocument,
+} from './documentNodes';
 
-const TodosQueryDocument = gql`
-  query getTodos($limit: Int, $offset: Int) {
-    todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
-      id
-      title
-      done
-      attachment {
-        id
-      }
-    }
-  }
-`;
-
-const TodosSubscriptionDocument = gql`
-  subscription subTodos($limit: Int, $offset: Int) {
-    todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
-      id
-      title
-      done
-      attachment {
-        id
-      }
-    }
-  }
-`;
-
-const TodosCountSubscriptionDocument = gql`
-  subscription subTodos {
-    todos_aggregate {
-      aggregate {
-        count
-      }
-    }
-  }
-`;
-
-const TodosSubscription = () => {
+const TodosCSR = () => {
   const pageString = useSearchParams().get('page');
   const page = pageString ? parseInt(pageString) : 0;
 
@@ -78,13 +47,13 @@ const TodosSubscription = () => {
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl">Todos ({count ?? '-'})</h2>
+        <h2 className="text-xl">CSR Todos ({count ?? '-'})</h2>
 
         <Link
-          href={`/protected/todos2/new`}
+          href={`/protected/todos/new-client-side`}
           className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
         >
-          Add Todo
+          Add Todo (Client Mutation)
         </Link>
       </div>
 
@@ -142,4 +111,4 @@ const TodosSubscription = () => {
   );
 };
 
-export default TodosSubscription;
+export default TodosCSR;
