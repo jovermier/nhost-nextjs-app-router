@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-export const RouteRefreshButton = ({ text = 'Refresh' }: { text?: string }) => {
+export const RouteRefreshButton = ({ children }: { children?: React.ReactNode }) => {
   const router = useRouter();
 
   return (
@@ -12,7 +12,7 @@ export const RouteRefreshButton = ({ text = 'Refresh' }: { text?: string }) => {
       }}
       className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
     >
-      {text}
+      {children ?? 'Refresh'}
     </button>
   );
 };

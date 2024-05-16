@@ -36,7 +36,7 @@ const TodosSSR = async ({
 
       <div className="flex flex-row justify-between pt-8">
         <h3 className="text-lg font-semibold">Server Side Query</h3>
-        <RouteRefreshButton />
+        <RouteRefreshButton>Router Refresh</RouteRefreshButton>
       </div>
 
       <ul className="pt-2">
