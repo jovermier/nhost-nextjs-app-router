@@ -1,9 +1,9 @@
-import { gql } from '@apollo/client';
+import Link from 'next/link';
+
 import TodoItem, { type Todo } from '@components/todo-item';
 import withAuthAsync from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
-
-import Link from 'next/link';
+import { TodosSSRQueryDocument } from './documentNodes';
 
 const TodosSSR = async ({
   params,
@@ -21,30 +21,10 @@ const TodosSSR = async ({
         aggregate: { count },
       },
     },
-  } = await nhost.graphql.request(
-    gql`
-      query getTodos($limit: Int, $offset: Int) {
-        todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
-          id
-          title
-          done
-          attachment {
-            id
-          }
-        }
-
-        todos_aggregate {
-          aggregate {
-            count
-          }
-        }
-      }
-    `,
-    {
-      offset: page * 10,
-      limit: 10,
-    },
-  );
+  } = await nhost.graphql.request(TodosSSRQueryDocument, {
+    offset: page * 10,
+    limit: 10,
+  });
 
   return (
     <>
