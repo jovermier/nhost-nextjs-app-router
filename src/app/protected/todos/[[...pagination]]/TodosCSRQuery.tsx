@@ -22,12 +22,7 @@ const TodosCSR = () => {
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl">CSR Todos Query</h2>
-        <span className="text-xl">({count ?? '-'})</span>
-      </div>
-
-      <div className="flex flex-row justify-between pt-8">
-        <h3 className="text-lg font-semibold">Query</h3>
+        <h2 className="text-xl">CSR Todos Query ({count ?? '-'})</h2>
         <button
           onClick={() => queryRes.refetch()}
           className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"

@@ -30,12 +30,7 @@ const TodosSSR = async ({
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl">SSR Todos</h2>
-        <span className="text-xl">({count ?? '-'})</span>
-      </div>
-
-      <div className="flex flex-row justify-between pt-8">
-        <h3 className="text-lg font-semibold">Server Side Query</h3>
+        <h2 className="text-xl">SSR Todos ({count ?? '-'})</h2>
         <RouteRefreshButton>Router Refresh</RouteRefreshButton>
       </div>
 

@@ -37,11 +37,15 @@ const TodosCSRSubscription = () => {
   return (
     <>
       <div className="flex items-center justify-between w-full">
-        <h2 className="text-xl">CSR Todos Subscription</h2>
-        <span className="text-xl">({count ?? '-'})</span>
+        <h2 className="text-xl">CSR Todos Subscription ({count ?? '-'})</h2>
+        <button
+          className="px-4 py-2 text-white bg-indigo-600 rounded-md disabled:opacity-50"
+          disabled
+        >
+          Auto Refresh
+        </button>
       </div>
 
-      <h3 className="text-lg font-semibold pt-8">CSR Todos Subscription</h3>
       <ul className="space-y-1">
         {subRes.data?.todos?.map((todo: Todo) => (
           <li key={todo.id}>

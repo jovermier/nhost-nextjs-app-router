@@ -1,28 +1,28 @@
-'use server'
+'use server';
 
-import { gql } from '@apollo/client'
-import { getNhost } from '@utils/nhost'
-import { redirect } from 'next/navigation'
+import { gql } from '@apollo/client';
+import { getNhost } from '@utils/nhost';
+import { redirect } from 'next/navigation';
 
 export const createTodo = async (formData: FormData) => {
-  const nhost = await getNhost()
+  const nhost = await getNhost();
 
-  const title = formData.get('title') as string
-  const file = formData.get('file') as File
+  const title = formData.get('title') as string;
+  const file = formData.get('file') as File;
 
   let payload: {
-    title: string
-    file_id?: string
+    title: string;
+    file_id?: string;
   } = {
-    title
-  }
+    title,
+  };
 
   if (file) {
     const { fileMetadata } = await nhost.storage.upload({
-      formData
-    })
+      formData,
+    });
 
-    payload.file_id = fileMetadata?.processedFiles[0]?.id
+    payload.file_id = fileMetadata?.processedFiles[0]?.id;
   }
 
   await nhost.graphql.request(
@@ -33,8 +33,8 @@ export const createTodo = async (formData: FormData) => {
         }
       }
     `,
-    payload
-  )
+    payload,
+  );
 
-  redirect('/protected/todos')
-}
+  redirect('/protected/todos');
+};
