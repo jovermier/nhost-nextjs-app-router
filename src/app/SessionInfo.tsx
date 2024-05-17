@@ -1,10 +1,10 @@
-import withAuth from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
 import Claims from './Claims';
+import { ApolloState } from './ApolloState';
 
-const SessionPage = async () => {
+export const SessionInfo = async () => {
   const nhost = await getNhost();
-  const session = nhost.auth.getSession(); // This works
+  const session = nhost.auth.getSession();
 
   return (
     <div className="flex flex-col gap-4">
@@ -16,8 +16,10 @@ const SessionPage = async () => {
       <div className="border">
         <Claims />
       </div>
+
+      <div className="border">
+        <ApolloState />
+      </div>
     </div>
   );
 };
-
-export default withAuth(SessionPage);

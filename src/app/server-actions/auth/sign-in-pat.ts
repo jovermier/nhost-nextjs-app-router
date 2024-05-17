@@ -15,7 +15,7 @@ export const signInWithPAT = async (formData: FormData) => {
 
   if (session) {
     cookies().set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
-    redirect('/protected/todos');
+    redirect('/');
   }
 
   if (error) {

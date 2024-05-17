@@ -1,4 +1,3 @@
-import withAuth from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
 
 const Claims = async () => {
@@ -13,4 +12,4 @@ const Claims = async () => {
   );
 };
 
-export default withAuth(Claims);
+export default Claims;

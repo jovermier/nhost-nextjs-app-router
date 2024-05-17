@@ -18,10 +18,6 @@ export default async function Navigation() {
       name: 'Home',
     },
     {
-      href: '/protected/session',
-      name: `${user ? '🔓' : '🔒'} Session`,
-    },
-    {
       href: '/protected/todos',
       name: `${user ? '🔓' : '🔒'} Todos`,
     },
