@@ -8,7 +8,7 @@ export const ApolloState = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="overflow-auto border">
-        <h1 className="text-xl font-semibold">Session</h1>
+        <h1 className="text-xl font-semibold">Auth State</h1>
         <pre className="overflow-auto">{JSON.stringify(authenticationStatus, null, 2)}</pre>
       </div>
     </div>
