@@ -10,7 +10,7 @@ export const SessionInfo = async () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="overflow-auto border">
-        <h1 className="text-xl font-semibold">Session</h1>
+        <h1 className="text-xl font-semibold">Session (getSession)</h1>
         <pre className="overflow-auto">{JSON.stringify(session, null, 2)}</pre>
       </div>
 

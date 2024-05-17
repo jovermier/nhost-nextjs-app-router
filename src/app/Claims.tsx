@@ -6,7 +6,7 @@ const Claims = async () => {
 
   return (
     <>
-      <h1 className="text-xl font-semibold">Hasura Claims</h1>
+      <h1 className="text-xl font-semibold">Hasura Claims (getHasuraClaims)</h1>
       <pre className="overflow-auto">{JSON.stringify(claims, null, 2)}</pre>
     </>
   );
