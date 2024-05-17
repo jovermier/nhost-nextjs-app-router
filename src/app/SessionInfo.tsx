@@ -1,6 +1,7 @@
 import { getNhost } from '@utils/nhost';
 import Claims from './Claims';
 import { ApolloState } from './ApolloState';
+import { UserState } from './UserState';
 
 export const SessionInfo = async () => {
   const nhost = await getNhost();
@@ -19,6 +20,10 @@ export const SessionInfo = async () => {
 
       <div className="border">
         <ApolloState />
+      </div>
+
+      <div className="border">
+        <UserState />
       </div>
     </div>
   );
