@@ -1,5 +1,5 @@
 {
-  "name": "@nhost-examples/nextjs-server-components",
+  "name": "nhost-nextjs-app-router",
   "version": "0.4.5",
   "private": true,
   "type": "module",
