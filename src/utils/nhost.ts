@@ -21,7 +21,7 @@ export const getNhost = async (request?: NextRequest) => {
   // const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) ?? 'null');
   const initialSession: NhostSession = sessionCookieValue.startsWith('{')
     ? (JSON.parse(sessionCookieValue) as NhostSession)
-    : (JSON.parse(atob(sessionCookieValue) ?? 'null') as NhostSession);
+    : (JSON.parse(atob(sessionCookieValue) || 'null') as NhostSession);
 
   nhost.auth.client.start({ initialSession });
   await waitFor(
