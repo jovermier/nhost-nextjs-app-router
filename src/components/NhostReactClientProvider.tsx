@@ -9,7 +9,7 @@ import { waitFor } from 'xstate/lib/waitFor';
 import { NHOST_SESSION_KEY } from '~/utils/nhost-constants';
 
 export const getClientNhost = () => {
-  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)! as string;
+  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)!;
 
   const nhost = new NhostClient({
     subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',

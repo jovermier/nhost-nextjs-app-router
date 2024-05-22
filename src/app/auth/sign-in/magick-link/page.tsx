@@ -1,31 +1,31 @@
-'use client'
+'use client';
 
-import Input from '@components/input'
-import SubmitButton from '@components/submit-button'
-import { NhostClient } from '@nhost/nhost-js'
-import { useState, type FormEvent } from 'react'
+import Input from '@components/input';
+import SubmitButton from '@components/submit-button';
+import { NhostClient } from '@nhost/nhost-js';
+import { useState, type FormEvent } from 'react';
 
 const nhost = new NhostClient({
-  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'local',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION
-})
+  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
+  region: process.env.NEXT_PUBLIC_NHOST_REGION,
+});
 
 export default function SignInMagickLink() {
-  const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSignIn = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { error } = await nhost.auth.signIn({ email })
+    const { error } = await nhost.auth.signIn({ email });
 
     if (error) {
-      setError(error.message)
+      setError(error.message);
     } else {
-      setIsSuccess(true)
+      setIsSuccess(true);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -53,5 +53,5 @@ export default function SignInMagickLink() {
         </SubmitButton>
       </form>
     </div>
-  )
+  );
 }

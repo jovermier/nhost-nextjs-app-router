@@ -6,12 +6,8 @@ import { getNhost } from '@utils/nhost';
 import { TodosQueryDocument } from './documentNodes';
 import { RouteRefreshButton } from './RouteRefreshButton';
 
-const TodosSSR = async ({
-  params,
-}: {
-  params: { [key: string]: string | string[] | undefined };
-}) => {
-  const page = parseInt(params.pagination?.at(0) || '0');
+const TodosSSR = async ({ params }: { params: Record<string, string | string[] | undefined> }) => {
+  const page = parseInt(params.pagination?.at(0) ?? '0');
 
   const nhost = await getNhost();
 
@@ -46,6 +42,7 @@ const TodosSSR = async ({
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link
+              prefetch={false}
               href={`/protected/todos/${page - 1}`}
               className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >
@@ -55,6 +52,7 @@ const TodosSSR = async ({
 
           {page + 1 < Math.ceil(count / 10) && (
             <Link
+              prefetch={false}
               href={`/protected/todos/${page + 1}`}
               className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >

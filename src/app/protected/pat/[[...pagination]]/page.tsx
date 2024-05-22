@@ -4,14 +4,8 @@ import withAuthAsync from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
 import Link from 'next/link';
 
-const PATs = async ({
-  params,
-}: {
-  params: {
-    [key: string]: string | string[] | undefined;
-  };
-}) => {
-  const page = parseInt(params.pagination?.at(0) || '0');
+const PATs = async ({ params }: { params: Record<string, string | string[] | undefined> }) => {
+  const page = parseInt(params.pagination?.at(0) ?? '0');
   const nhost = await getNhost();
 
   const {
@@ -55,6 +49,7 @@ const PATs = async ({
         <h2 className="text-xl">Personal Access Tokens ({count})</h2>
 
         <Link
+          prefetch={false}
           href={`/protected/pat/new`}
           className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
         >
@@ -74,6 +69,7 @@ const PATs = async ({
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link
+              prefetch={false}
               href={`/protected/pat/${page - 1}`}
               className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >
@@ -83,6 +79,7 @@ const PATs = async ({
 
           {page + 1 < Math.ceil(count / 10) && (
             <Link
+              prefetch={false}
               href={`/protected/pat/${page + 1}`}
               className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >

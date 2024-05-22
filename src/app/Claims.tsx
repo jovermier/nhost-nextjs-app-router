@@ -1,5 +1,7 @@
 import { getNhost } from '@utils/nhost';
 
+export const dynamic = 'force-dynamic';
+
 const Claims = async () => {
   const nhost = await getNhost();
   const claims = nhost.auth.getHasuraClaims(); // This throws a runtime error

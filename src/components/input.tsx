@@ -1,8 +1,7 @@
-'use client'
+'use client';
 
-import { DetailedHTMLProps, HTMLProps } from 'react'
-// @ts-ignore
-import { useFormStatus } from 'react-dom'
+import { type DetailedHTMLProps, type HTMLProps } from 'react';
+import { useFormStatus } from 'react-dom';
 
 export default function Input({
   id,
@@ -13,9 +12,9 @@ export default function Input({
   className,
   ...rest
 }: DetailedHTMLProps<HTMLProps<HTMLInputElement>, HTMLInputElement>) {
-  const { pending } = useFormStatus()
+  const { pending } = useFormStatus();
 
-  const { children, ...restOfInputProps } = rest
+  const { children, ...restOfInputProps } = rest;
 
   return (
     <div className={className}>
@@ -34,5 +33,5 @@ export default function Input({
         {...restOfInputProps}
       />
     </div>
-  )
+  );
 }

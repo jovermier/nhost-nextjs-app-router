@@ -1,7 +1,18 @@
+import dynamicImport from 'next/dynamic';
+
 import { getNhost } from '@utils/nhost';
 import Claims from './Claims';
 import { ApolloState } from './ApolloState';
 import { UserState } from './UserState';
+
+// const ApolloState = dynamicImport(() => import('./ApolloState'), {
+//   ssr: false,
+// });
+// const UserState = dynamicImport(() => import('./UserState'), {
+//   ssr: false,
+// });
+
+export const dynamic = 'force-dynamic';
 
 export const SessionInfo = async () => {
   const nhost = await getNhost();

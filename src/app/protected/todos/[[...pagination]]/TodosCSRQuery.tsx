@@ -2,7 +2,7 @@
 
 import { useQuery } from '@apollo/client';
 import Link from 'next/link';
-import TodoItem, { Todo } from '@components/todo-item';
+import TodoItem, { type Todo } from '@components/todo-item';
 import { useSearchParams } from 'next/navigation';
 import { TodosQueryDocument } from './documentNodes';
 
@@ -44,6 +44,7 @@ const TodosCSR = () => {
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link
+              prefetch={false}
               href={`/protected/todos/${page - 1}`}
               className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >
@@ -53,6 +54,7 @@ const TodosCSR = () => {
 
           {page + 1 < Math.ceil(count / 10) && (
             <Link
+              prefetch={false}
               href={`/protected/todos/${page + 1}`}
               className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
             >

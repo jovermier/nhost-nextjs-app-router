@@ -3,6 +3,8 @@ import AuthPage from './auth-page';
 import UnAuthPage from './unauth-page';
 import { SessionInfo } from './SessionInfo';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const nhost = await getNhost();
   const session = nhost.auth.getSession();

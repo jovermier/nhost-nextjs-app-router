@@ -2,6 +2,8 @@
 
 import { useUserData } from '@nhost/nextjs';
 
+export const dynamic = 'force-dynamic';
+
 export const UserState = () => {
   const userData = useUserData();
 
@@ -14,3 +16,5 @@ export const UserState = () => {
     </div>
   );
 };
+
+export default UserState;

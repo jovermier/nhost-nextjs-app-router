@@ -2,6 +2,8 @@
 
 import { useAuthenticationStatus } from '@nhost/nextjs';
 
+export const dynamic = 'force-dynamic';
+
 export const ApolloState = () => {
   const authenticationStatus = useAuthenticationStatus();
 
@@ -14,3 +16,5 @@ export const ApolloState = () => {
     </div>
   );
 };
+
+export default ApolloState;

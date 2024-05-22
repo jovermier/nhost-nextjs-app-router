@@ -1,63 +1,63 @@
-'use client'
+'use client';
 
-import { NhostClient } from '@nhost/nhost-js'
-import { deleteTodo, updateTodo } from '@server-actions/todos'
-import Link from 'next/link'
-import { useState } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { NhostClient } from '@nhost/nhost-js';
+import { deleteTodo, updateTodo } from '@server-actions/todos';
+import Link from 'next/link';
+import { useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 const nhost = new NhostClient({
-  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'local',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION
-})
+  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
+  region: process.env.NEXT_PUBLIC_NHOST_REGION,
+});
 
 export interface Todo {
-  id: string
-  title: string
-  done: boolean
+  id: string;
+  title: string;
+  done: boolean;
   attachment: {
-    id: string
-  }
+    id: string;
+  };
 }
 
 const TodoItem = ({ todo }: { todo: Todo }) => {
-  const [completed, setCompleted] = useState(todo.done)
+  const [completed, setCompleted] = useState(todo.done);
 
   const handleCheckboxChange = async () => {
-    setCompleted(!completed)
-    await updateTodo(todo.id, !completed)
-  }
+    setCompleted(!completed);
+    await updateTodo(todo.id, !completed);
+  };
 
   const handleDeleteTodo = async () => {
-    await deleteTodo(todo.id)
-  }
+    await deleteTodo(todo.id);
+  };
 
   const handleDownloadAttachment = async () => {
     if (todo.attachment) {
-      const response = await nhost.storage.download({ fileId: todo.attachment.id })
+      const response = await nhost.storage.download({ fileId: todo.attachment.id });
       if (response.file) {
-        const url = window.URL.createObjectURL(response.file)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = todo.title
-        a.click()
-        window.URL.revokeObjectURL(url)
+        const url = window.URL.createObjectURL(response.file);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = todo.title;
+        a.click();
+        window.URL.revokeObjectURL(url);
       }
     }
-  }
+  };
 
   return (
     <div
       className={twMerge(
         'flex flex-row items-center p-2 bg-slate-100',
-        completed && 'line-through bg-slate-200'
+        completed && 'line-through bg-slate-200',
       )}
     >
       <label
         htmlFor={todo.id}
         className={twMerge(
           'block w-full space-x-2 rounded  select-none justify-center',
-          completed && 'line-through bg-slate-200'
+          completed && 'line-through bg-slate-200',
         )}
       >
         <input type="checkbox" id={todo.id} checked={completed} onChange={handleCheckboxChange} />
@@ -66,6 +66,7 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
 
       {todo.attachment && (
         <Link
+          prefetch={false}
           className="w-6 h-6"
           target="_blank"
           passHref
@@ -111,7 +112,7 @@ const TodoItem = ({ todo }: { todo: Todo }) => {
         </svg>
       </button>
     </div>
-  )
-}
+  );
+};
 
-export default TodoItem
+export default TodoItem;

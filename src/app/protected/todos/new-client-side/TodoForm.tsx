@@ -27,14 +27,18 @@ export default function TodoForm() {
         variables: {
           title: formData.get('title') as string,
         },
-      }).then((res) => {
-        console.log(res);
-        if (res.errors) {
-          console.log(res.errors);
-        } else {
-          router.push('/protected/todos');
-        }
-      });
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.errors) {
+            console.log(res.errors);
+          } else {
+            router.push('/protected/todos');
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
     [addTodo, router],
   );

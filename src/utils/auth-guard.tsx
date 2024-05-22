@@ -1,7 +1,7 @@
 import { getNhost } from '@utils/nhost';
 import { redirect } from 'next/navigation';
 
-const withAuthAsync = <P extends {}>(Component: React.FunctionComponent<P>) => {
+const withAuthAsync = <P extends object>(Component: React.FunctionComponent<P>) => {
   const WrappedComponent = async (props: P) => {
     const nhost = await getNhost();
     const session = nhost.auth.getSession();
@@ -13,7 +13,7 @@ const withAuthAsync = <P extends {}>(Component: React.FunctionComponent<P>) => {
     return <Component {...props} />;
   };
   WrappedComponent.displayName = `withAuthAsync(${
-    Component.displayName || Component.name || 'Component'
+    Component.displayName ?? Component.name ?? 'Component'
   })`;
 
   return WrappedComponent;

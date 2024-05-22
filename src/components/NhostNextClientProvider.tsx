@@ -12,12 +12,12 @@ export const nhost = new NhostClient({
 });
 
 export const getClientNhost = () => {
-  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)! as string;
+  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)!;
 
   if (sessionCookieValue) {
     console.log('sessionCookieValue', sessionCookieValue);
     const serverSession: NhostSession = JSON.parse(
-      sessionCookieValue[0] === '{' ? sessionCookieValue : atob(sessionCookieValue) || 'null',
+      sessionCookieValue.startsWith('{') ? sessionCookieValue : atob(sessionCookieValue) || 'null',
     ) as NhostSession;
 
     nhost.auth.client.start({ initialSession: serverSession });

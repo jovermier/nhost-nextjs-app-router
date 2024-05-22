@@ -10,7 +10,7 @@ export const createTodo = async (formData: FormData) => {
   const title = formData.get('title') as string;
   const file = formData.get('file') as File;
 
-  let payload: {
+  const payload: {
     title: string;
     file_id?: string;
   } = {

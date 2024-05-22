@@ -1,10 +1,10 @@
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import Link from 'next/link';
 
 import { signOut } from '@server-actions/auth';
 import { getNhost } from '../utils/nhost';
 
-const SignOut = dynamic(() => import('./sign-out'), {
+const SignOut = dynamicImport(() => import('./sign-out'), {
   ssr: false,
 });
 
@@ -39,6 +39,7 @@ export default async function Navigation() {
             <div className="ml-10 space-x-8">
               {nav.map((link) => (
                 <Link
+                  prefetch={false}
                   key={link.href}
                   href={link.href}
                   className="text-lg font-medium text-white hover:text-indigo-50"
@@ -54,12 +55,14 @@ export default async function Navigation() {
             ) : (
               <>
                 <Link
+                  prefetch={false}
                   href="/auth/sign-in"
                   className="inline-block px-4 py-2 text-base font-medium text-white bg-indigo-500 border border-transparent rounded-md hover:bg-opacity-75"
                 >
                   Sign in
                 </Link>
                 <Link
+                  prefetch={false}
                   href="/auth/sign-up"
                   className="inline-block px-4 py-2 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-indigo-50"
                 >

@@ -1,28 +1,27 @@
 // import 'server-only';
 
-import { AuthErrorPayload, NhostClient, NhostSession } from '@nhost/nhost-js';
+import { type AuthErrorPayload, NhostClient, type NhostSession } from '@nhost/nhost-js';
 import { cookies } from 'next/headers';
 
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import { type StateFrom } from 'xstate/lib/types';
 import { waitFor } from 'xstate/lib/waitFor';
 import { NHOST_SESSION_KEY } from './nhost-constants';
 
 export const getNhost = async (request?: NextRequest) => {
-  const $cookies = request?.cookies || cookies();
+  const $cookies = request?.cookies ?? cookies();
 
   const nhost = new NhostClient({
-    subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN || 'local',
+    subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
     region: process.env.NEXT_PUBLIC_NHOST_REGION,
     start: false,
   });
 
-  const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY)?.value || '';
-  // const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) || 'null');
-  const initialSession: NhostSession =
-    sessionCookieValue[0] === '{'
-      ? (JSON.parse(sessionCookieValue) as NhostSession)
-      : (JSON.parse(atob(sessionCookieValue) || 'null') as NhostSession);
+  const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY)?.value ?? '';
+  // const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) ?? 'null');
+  const initialSession: NhostSession = sessionCookieValue.startsWith('{')
+    ? (JSON.parse(sessionCookieValue) as NhostSession)
+    : (JSON.parse(atob(sessionCookieValue) ?? 'null') as NhostSession);
 
   nhost.auth.client.start({ initialSession });
   await waitFor(
@@ -41,13 +40,13 @@ export const manageAuthSession = async (
   const session = nhost.auth.getSession();
 
   const url = new URL(request.url);
-  const refreshToken = url.searchParams.get('refreshToken') || undefined;
+  const refreshToken = url.searchParams.get('refreshToken') ?? undefined;
 
   const currentTime = Math.floor(Date.now() / 1000);
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
   const accessTokenExpired = session && tokenExpirationTime && currentTime > tokenExpirationTime;
 
-  if (accessTokenExpired || refreshToken) {
+  if (accessTokenExpired ?? refreshToken) {
     const { session: newSession, error } = await nhost.auth.refreshSession(refreshToken);
 
     if (error) {

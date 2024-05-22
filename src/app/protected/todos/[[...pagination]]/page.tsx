@@ -1,4 +1,4 @@
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 import Link from 'next/link';
 
 import withAuthAsync from '@utils/auth-guard';
@@ -7,15 +7,16 @@ import TodosCSRQuery from './TodosCSRQuery';
 import TodoFormClient from '../new-client-side/TodoForm';
 import TodoFormServer from '@components/todo-form';
 
-const TodosCSRSubscription = dynamic(() => import('./TodosCSRSubscription'), {
+const TodosCSRSubscription = dynamicImport(() => import('./TodosCSRSubscription'), {
   ssr: false,
 });
 
-const Todos = async (props: { params: { [key: string]: string | string[] | undefined } }) => {
+const Todos = async (props: { params: Record<string, string | string[] | undefined> }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row gap-2">
         <Link
+          prefetch={false}
           href={`/protected/todos/new-server-action`}
           className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
         >
@@ -23,6 +24,7 @@ const Todos = async (props: { params: { [key: string]: string | string[] | undef
         </Link>
 
         <Link
+          prefetch={false}
           href={`/protected/todos/new-client-side`}
           className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
         >

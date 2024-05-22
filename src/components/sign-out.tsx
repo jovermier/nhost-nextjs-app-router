@@ -1,6 +1,6 @@
 'use client';
 
-import { useUserData } from '@nhost/react';
+import { useUserData } from '@nhost/nextjs';
 
 export default function SignOut({ signOut }: { signOut: () => Promise<void> }) {
   const userData = useUserData();
