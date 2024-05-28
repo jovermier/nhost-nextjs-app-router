@@ -42,9 +42,19 @@ export const getNhost = async (request?: NextRequest) => {
     (state: StateFrom<AuthMachine>) => !state.hasTag('loading'),
   );
 
-  if (!nhost.auth.isAuthenticated()) {
-    console.log('initialSession', initialSession);
-  }
+  console.log(
+    JSON.stringify(
+      {
+        getNhost: {
+          initialSession: initialSession ?? null,
+          getSession: nhost.auth.getSession(),
+          getHasuraClaims: nhost.auth.getHasuraClaims(),
+        },
+      },
+      null,
+      2,
+    ),
+  );
 
   return nhost;
 };
