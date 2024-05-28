@@ -1,33 +1,27 @@
 'use client';
 
+import { useState } from 'react';
 import { NhostClient, type NhostSession, NhostProvider } from '@nhost/react';
 import { NhostApolloProvider } from '@nhost/react-apollo';
-import { useState } from 'react';
 import Cookies from 'js-cookie';
-import { type StateFrom } from 'xstate';
-import { waitFor } from 'xstate/lib/waitFor';
-import { NHOST_SESSION_KEY } from '~/utils/nhost-constants';
+
+import { NHOST_SESSION_KEY_CLIENT } from '~/utils/nhost-constants';
 
 export const getClientNhost = () => {
-  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)!;
+  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY_CLIENT)!;
 
   const nhost = new NhostClient({
     subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
     region: process.env.NEXT_PUBLIC_NHOST_REGION,
-    // startSession: false
   });
 
   if (sessionCookieValue) {
-    const serverSession: NhostSession = JSON.parse(
-      atob(sessionCookieValue) || 'null',
-    ) as NhostSession;
+    console.log('sessionCookieValue', sessionCookieValue);
+    const clientSession = sessionCookieValue
+      ? (JSON.parse(sessionCookieValue) as NhostSession)
+      : undefined;
 
-    nhost.auth.client.start({ initialSession: serverSession });
-
-    // await waitFor(
-    //   nhost.auth.client.interpreter!,
-    //   (state: StateFrom<any>) => !state.hasTag('loading'),
-    // );
+    nhost.auth.client.start({ initialSession: clientSession });
   }
 
   return nhost;

@@ -4,13 +4,17 @@ import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 import TodoItem, { type Todo } from '@components/todo-item';
 import { useSearchParams } from 'next/navigation';
-import { TodosQueryDocument } from './documentNodes';
+import {
+  GetTodosDocument,
+  type GetTodosQuery,
+  type GetTodosQueryVariables,
+} from '~/generated/graphql';
 
 const TodosCSR = () => {
   const pageString = useSearchParams().get('page');
   const page = pageString ? parseInt(pageString) : 0;
 
-  const queryRes = useQuery(TodosQueryDocument, {
+  const queryRes = useQuery<GetTodosQuery, GetTodosQueryVariables>(GetTodosDocument, {
     variables: {
       offset: page * 10,
       limit: 10,
@@ -40,7 +44,7 @@ const TodosCSR = () => {
         {queryRes.loading && <li>Query Loading...</li>}
       </ul>
 
-      {count > 10 && (
+      {count && count > 10 && (
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link

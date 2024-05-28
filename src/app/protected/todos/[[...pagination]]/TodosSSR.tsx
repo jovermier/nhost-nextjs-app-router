@@ -1,27 +1,31 @@
 import Link from 'next/link';
 
-import TodoItem, { type Todo } from '@components/todo-item';
+import TodoItem from '@components/todo-item';
 import withAuthAsync from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
-import { TodosQueryDocument } from './documentNodes';
 import { RouteRefreshButton } from './RouteRefreshButton';
+import {
+  GetTodosDocument,
+  type GetTodosQuery,
+  type GetTodosQueryVariables,
+} from '~/generated/graphql';
 
 const TodosSSR = async ({ params }: { params: Record<string, string | string[] | undefined> }) => {
   const page = parseInt(params.pagination?.at(0) ?? '0');
 
   const nhost = await getNhost();
 
-  const {
-    data: {
-      todos,
-      todos_aggregate: {
-        aggregate: { count },
-      },
+  const { data } = await nhost.graphql.request<GetTodosQuery, GetTodosQueryVariables>(
+    GetTodosDocument,
+    {
+      offset: page * 10,
+      limit: 10,
     },
-  } = await nhost.graphql.request(TodosQueryDocument, {
-    offset: page * 10,
-    limit: 10,
-  });
+  );
+
+  const todos = data?.todos;
+
+  const count = data?.todos_aggregate.aggregate?.count;
 
   return (
     <>
@@ -31,14 +35,14 @@ const TodosSSR = async ({ params }: { params: Record<string, string | string[] |
       </div>
 
       <ul className="pt-2">
-        {todos.map((todo: Todo) => (
+        {todos?.map((todo) => (
           <li key={todo.id}>
             <TodoItem todo={todo} />
           </li>
         ))}
       </ul>
 
-      {count > 10 && (
+      {count && count > 10 && (
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link

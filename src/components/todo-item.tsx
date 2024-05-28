@@ -15,9 +15,7 @@ export interface Todo {
   id: string;
   title: string;
   done: boolean;
-  attachment: {
-    id: string;
-  };
+  attachment?: { id: uuid } | null;
 }
 
 const TodoItem = ({ todo }: { todo: Todo }) => {

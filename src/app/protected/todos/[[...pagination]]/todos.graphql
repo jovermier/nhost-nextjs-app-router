@@ -1,0 +1,35 @@
+query GetTodos($limit: Int, $offset: Int) {
+  todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
+    id
+    title
+    done
+    attachment {
+      id
+    }
+  }
+
+  todos_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+
+subscription SubTodos($limit: Int, $offset: Int) {
+  todos(limit: $limit, offset: $offset, order_by: { createdAt: desc }) {
+    id
+    title
+    done
+    attachment {
+      id
+    }
+  }
+}
+
+subscription SubTodosCount {
+  todos_aggregate {
+    aggregate {
+      count
+    }
+  }
+}

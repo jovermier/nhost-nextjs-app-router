@@ -1,0 +1,13 @@
+node_modules/*
+public/*
+src/generated/*
+build/*
+reportWebVitals.ts
+serviceWorker.ts
+codegen.js
+*.d.ts
+.history
+android/
+notes/
+.next/
+zodExampleSchema.ts

@@ -33,8 +33,17 @@
       "@server-actions/*": ["./src/app/server-actions/*"],
       "@types": ["./src/types"],
       "react": ["./node_modules/@types/react"]
-    }
+    },
+    "typeRoots": ["src/@types", "./node_modules/@types"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "functions", "public", ".next", "dist"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".eslintrc.cjs",
+    "./*.cjs",
+    "./*.js"
+  ],
+  "exclude": ["node_modules", "functions", "public", ".next", "dist", "nhost", ".nhost"]
 }

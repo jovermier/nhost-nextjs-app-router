@@ -6,7 +6,7 @@ import { NhostClient } from '@nhost/nhost-js';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
-import { NHOST_SESSION_KEY } from '~/utils/nhost-constants';
+import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
 
 const nhost = new NhostClient({
   subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
@@ -36,7 +36,7 @@ export default function SignUpWebAuthn() {
     });
 
     if (session) {
-      Cookies.set(NHOST_SESSION_KEY, btoa(JSON.stringify(session)), { path: '/' });
+      Cookies.set(NHOST_SESSION_KEY_SERVER, btoa(JSON.stringify(session)), { path: '/' });
       router.push('/protected/todos');
     }
   };

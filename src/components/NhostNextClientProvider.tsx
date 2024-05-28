@@ -1,10 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { NhostClient, type NhostSession, NhostProvider } from '@nhost/nextjs';
 import { NhostApolloProvider } from '@nhost/react-apollo';
-import { useState } from 'react';
 import Cookies from 'js-cookie';
-import { NHOST_SESSION_KEY } from '~/utils/nhost-constants';
+
+import { NHOST_SESSION_KEY_CLIENT } from '~/utils/nhost-constants';
 
 export const nhost = new NhostClient({
   subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
@@ -12,15 +13,15 @@ export const nhost = new NhostClient({
 });
 
 export const getClientNhost = () => {
-  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY)!;
+  const sessionCookieValue = Cookies.get(NHOST_SESSION_KEY_CLIENT)!;
 
   if (sessionCookieValue) {
     console.log('sessionCookieValue', sessionCookieValue);
-    const serverSession: NhostSession = JSON.parse(
-      sessionCookieValue.startsWith('{') ? sessionCookieValue : atob(sessionCookieValue) || 'null',
-    ) as NhostSession;
+    const clientSession = sessionCookieValue
+      ? (JSON.parse(atob(sessionCookieValue)) as NhostSession)
+      : undefined;
 
-    nhost.auth.client.start({ initialSession: serverSession });
+    nhost.auth.client.start({ initialSession: clientSession });
   }
 
   return nhost;

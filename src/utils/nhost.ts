@@ -1,12 +1,15 @@
-// import 'server-only';
-
-import { type AuthErrorPayload, NhostClient, type NhostSession } from '@nhost/nhost-js';
+import {
+  type AuthErrorPayload,
+  NhostClient,
+  type NhostSession,
+  type AuthMachine,
+} from '@nhost/nhost-js';
 import { cookies } from 'next/headers';
 
 import { type NextRequest, NextResponse } from 'next/server';
 import { type StateFrom } from 'xstate/lib/types';
 import { waitFor } from 'xstate/lib/waitFor';
-import { NHOST_SESSION_KEY } from './nhost-constants';
+import { NHOST_SESSION_KEY_SERVER } from './nhost-constants';
 
 export const getNhost = async (request?: NextRequest) => {
   const $cookies = request?.cookies ?? cookies();
@@ -17,17 +20,31 @@ export const getNhost = async (request?: NextRequest) => {
     start: false,
   });
 
-  const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY)?.value ?? '';
-  // const initialSession: NhostSession = JSON.parse(atob(sessionCookieValue) ?? 'null');
-  const initialSession: NhostSession = sessionCookieValue.startsWith('{')
-    ? (JSON.parse(sessionCookieValue) as NhostSession)
-    : (JSON.parse(atob(sessionCookieValue) || 'null') as NhostSession);
+  const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY_SERVER)?.value;
+  let initialSession = sessionCookieValue
+    ? (JSON.parse(atob(sessionCookieValue)) as NhostSession)
+    : undefined;
+
+  if (!initialSession) {
+    const nhostRefreshToken = $cookies.get('nhostRefreshToken')?.value;
+
+    if (nhostRefreshToken) {
+      const session = await nhost.auth.refreshSession(nhostRefreshToken);
+      if (session) {
+        initialSession = session.session ?? undefined;
+      }
+    }
+  }
 
   nhost.auth.client.start({ initialSession });
   await waitFor(
     nhost.auth.client.interpreter!,
-    (state: StateFrom<any>) => !state.hasTag('loading'),
+    (state: StateFrom<AuthMachine>) => !state.hasTag('loading'),
   );
+
+  if (!nhost.auth.isAuthenticated()) {
+    console.log('initialSession', initialSession);
+  }
 
   return nhost;
 };
@@ -59,7 +76,7 @@ export const manageAuthSession = async (
     // overwrite the session cookie with the new session
     return NextResponse.redirect(url, {
       headers: {
-        'Set-Cookie': `${NHOST_SESSION_KEY}=${btoa(JSON.stringify(newSession))}; Path=/`,
+        'Set-Cookie': `${NHOST_SESSION_KEY_SERVER}=${btoa(JSON.stringify(newSession))}; Path=/`,
       },
     });
   }

@@ -4,13 +4,14 @@ const config = {
   parserOptions: {
     project: true,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'eslint-plugin-react-compiler'],
   extends: [
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
   ],
   rules: {
+    'react-compiler/react-compiler': 'error',
     'react/react-in-jsx-scope': 'off',
     '@next/next/no-server-import-in-page': 'off',
     '@typescript-eslint/array-type': 'off',

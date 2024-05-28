@@ -20,7 +20,7 @@ export default function SubmitButton({
   return (
     <button
       type={type}
-      disabled={pending}
+      disabled={disabled ?? pending}
       className={twMerge(
         pending
           ? 'bg-indigo-200 hover:bg-grey-700'

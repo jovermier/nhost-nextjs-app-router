@@ -5,28 +5,41 @@ import Link from 'next/link';
 import TodoItem, { type Todo } from '@components/todo-item';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { TodosCountSubscriptionDocument, TodosSubscriptionDocument } from './documentNodes';
+import {
+  SubTodosCountDocument,
+  type SubTodosCountSubscription,
+  type SubTodosCountSubscriptionVariables,
+  SubTodosDocument,
+  type SubTodosSubscription,
+  type SubTodosSubscriptionVariables,
+} from '~/generated/graphql';
 
 const TodosCSRSubscription = () => {
   const pageString = useSearchParams().get('page');
   const page = pageString ? parseInt(pageString) : 0;
 
-  const countRes = useSubscription(TodosCountSubscriptionDocument, {
-    fetchPolicy: 'cache-first',
-    shouldResubscribe: false,
-  });
+  const countRes = useSubscription<SubTodosCountSubscription, SubTodosCountSubscriptionVariables>(
+    SubTodosCountDocument,
+    {
+      fetchPolicy: 'cache-first',
+      shouldResubscribe: false,
+    },
+  );
   const count = countRes.data?.todos_aggregate?.aggregate?.count;
 
-  const subRes = useSubscription(TodosSubscriptionDocument, {
-    variables: {
-      offset: page * 10,
-      limit: 10,
+  const subRes = useSubscription<SubTodosSubscription, SubTodosSubscriptionVariables>(
+    SubTodosDocument,
+    {
+      variables: {
+        offset: page * 10,
+        limit: 10,
+      },
+      fetchPolicy: 'cache-first',
+      shouldResubscribe: false,
     },
-    fetchPolicy: 'cache-first',
-    shouldResubscribe: false,
-  });
+  );
 
-  const dataRef = useRef(() => subRes.data);
+  const dataRef = useRef(subRes.data);
   useEffect(() => {
     if (subRes.data !== dataRef.current) {
       dataRef.current = subRes.data;
@@ -55,7 +68,7 @@ const TodosCSRSubscription = () => {
         {subRes.loading && <li>Subscription Loading...</li>}
       </ul>
 
-      {count > 10 && (
+      {count && count > 10 && (
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link
