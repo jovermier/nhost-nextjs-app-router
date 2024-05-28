@@ -2,13 +2,8 @@
 
 import Input from '@components/input';
 import SubmitButton from '@components/submit-button';
-import { NhostClient } from '@nhost/nhost-js';
 import { useState, type FormEvent } from 'react';
-
-const nhost = new NhostClient({
-  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION,
-});
+import { getClientNhost } from '~/components/NhostNextClientProvider';
 
 export default function SignInMagickLink() {
   const [email, setEmail] = useState('');
@@ -18,6 +13,7 @@ export default function SignInMagickLink() {
   const handleSignIn = async (e: FormEvent) => {
     e.preventDefault();
 
+    const nhost = getClientNhost();
     const { error } = await nhost.auth.signIn({ email });
 
     if (error) {

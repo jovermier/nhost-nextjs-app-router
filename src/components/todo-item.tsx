@@ -1,15 +1,10 @@
 'use client';
 
-import { NhostClient } from '@nhost/nhost-js';
 import { deleteTodo, updateTodo } from '@server-actions/todos';
 import Link from 'next/link';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
-
-const nhost = new NhostClient({
-  subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
-  region: process.env.NEXT_PUBLIC_NHOST_REGION,
-});
+import { getClientNhost } from './NhostNextClientProvider';
 
 export interface Todo {
   id: string;
@@ -20,6 +15,8 @@ export interface Todo {
 
 const TodoItem = ({ todo }: { todo: Todo }) => {
   const [completed, setCompleted] = useState(todo.done);
+
+  const [nhost] = useState(() => getClientNhost());
 
   const handleCheckboxChange = async () => {
     setCompleted(!completed);
