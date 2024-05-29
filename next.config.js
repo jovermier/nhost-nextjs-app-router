@@ -6,7 +6,7 @@
 /** @type {import("next").NextConfig} */
 const config = {
   experimental: {
-    reactCompiler: true,
+    reactCompiler: false,
   },
 };
 

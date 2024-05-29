@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 import { getNhost } from '@utils/nhost';
 import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
@@ -16,7 +17,9 @@ export const signIn = async (formData: FormData) => {
 
   if (session) {
     cookies().set(NHOST_SESSION_KEY_SERVER, btoa(JSON.stringify(session)), { path: '/' });
-    redirect('/');
+    return { success: true, session };
+    // revalidatePath('/');
+    // redirect('/');
   }
 
   if (error) {

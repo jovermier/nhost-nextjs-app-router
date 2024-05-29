@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 import { getNhost } from '@utils/nhost';
 import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
@@ -11,7 +12,17 @@ export const signOut = async () => {
 
   await nhost.auth.signOut();
 
-  cookies().delete(NHOST_SESSION_KEY_SERVER);
+  [
+    NHOST_SESSION_KEY_SERVER,
+    'nhostRefreshToken',
+    'nhostRefreshTokenId',
+    'nhostRefreshTokenExpiresAt',
+  ].forEach((key) => {
+    cookies().delete(key);
+  });
 
-  redirect('/');
+  return { success: true };
+
+  // revalidatePath('/');
+  // redirect('/');
 };

@@ -1,18 +1,31 @@
-'use client'
+'use client';
 
-import Input from '@components/input'
-import SubmitButton from '@components/submit-button'
-import { signIn } from '@server-actions/auth'
-import { useState } from 'react'
+import { useState } from 'react';
+
+import Input from '@components/input';
+import SubmitButton from '@components/submit-button';
+import { signIn } from '@server-actions/auth';
+import { useNhostClient } from '@nhost/react';
+import { useRouter } from 'next/navigation';
 
 export default function SignInWithEmailAndPassword() {
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
+  const nhost = useNhostClient();
+  const router = useRouter();
 
   async function handleSignIn(formData: FormData) {
-    const response = await signIn(formData)
+    const response = await signIn(formData);
+
+    if (response?.success) {
+      const refreshToken = response.session.refreshToken;
+      if (refreshToken) {
+        await nhost.auth.refreshSession(refreshToken);
+        router.push('/');
+      }
+    }
 
     if (response?.error) {
-      setError(response.error)
+      setError(response.error);
     }
   }
 
@@ -32,5 +45,5 @@ export default function SignInWithEmailAndPassword() {
         </SubmitButton>
       </form>
     </div>
-  )
+  );
 }

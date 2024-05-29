@@ -1,7 +1,6 @@
 import dynamicImport from 'next/dynamic';
 import Link from 'next/link';
 
-import { signOut } from '@server-actions/auth';
 import { getNhost } from '../utils/nhost';
 
 const SignOut = dynamicImport(() => import('./sign-out'), {
@@ -51,7 +50,7 @@ export default async function Navigation() {
           </div>
           <div className="ml-10 space-x-4">
             {user ? (
-              <SignOut signOut={signOut} />
+              <SignOut />
             ) : (
               <>
                 <Link

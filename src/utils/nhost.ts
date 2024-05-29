@@ -21,20 +21,20 @@ export const getNhost = async (request?: NextRequest) => {
   });
 
   const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY_SERVER)?.value;
-  let initialSession = sessionCookieValue
+  const initialSession = sessionCookieValue
     ? (JSON.parse(atob(sessionCookieValue)) as NhostSession)
     : undefined;
 
-  if (!initialSession) {
-    const nhostRefreshToken = $cookies.get('nhostRefreshToken')?.value;
+  // if (!initialSession) {
+  //   const nhostRefreshToken = $cookies.get('nhostRefreshToken')?.value;
 
-    if (nhostRefreshToken) {
-      const session = await nhost.auth.refreshSession(nhostRefreshToken);
-      if (session) {
-        initialSession = session.session ?? undefined;
-      }
-    }
-  }
+  //   if (nhostRefreshToken) {
+  //     const session = await nhost.auth.refreshSession(nhostRefreshToken);
+  //     if (session) {
+  //       initialSession = session.session ?? undefined;
+  //     }
+  //   }
+  // }
 
   nhost.auth.client.start({ initialSession });
   await waitFor(
@@ -73,7 +73,8 @@ export const manageAuthSession = async (
   const tokenExpirationTime = nhost.auth.getDecodedAccessToken()?.exp;
   const accessTokenExpired = session && tokenExpirationTime && currentTime > tokenExpirationTime;
 
-  if (accessTokenExpired ?? refreshToken) {
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  if (accessTokenExpired || refreshToken) {
     const { session: newSession, error } = await nhost.auth.refreshSession(refreshToken);
 
     if (error) {
