@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import PatItem from '@components/pat-item';
 import withAuthAsync from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
@@ -18,7 +15,6 @@ const PATs = async ({ params }: { params: Record<string, string | string[] | und
   const result = await nhost.graphql.request<
     GetPersonalAccessTokensQuery,
     GetPersonalAccessTokensQueryVariables
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   >(GetPersonalAccessTokensDocument, {
     offset: page * 10,
     limit: 10,
