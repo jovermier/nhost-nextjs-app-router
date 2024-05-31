@@ -6,7 +6,10 @@
 /** @type {import("next").NextConfig} */
 const config = {
   experimental: {
-    reactCompiler: false,
+    reactCompiler: true,
+  },
+  compiler: {
+    removeConsole: false,
   },
 };
 

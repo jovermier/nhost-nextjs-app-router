@@ -1,8 +1,6 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
 
 import { getNhost } from '@utils/nhost';
 import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
@@ -22,7 +20,4 @@ export const signOut = async () => {
   });
 
   return { success: true };
-
-  // revalidatePath('/');
-  // redirect('/');
 };

@@ -9,6 +9,7 @@ const config = {
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended-type-checked',
     'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:@next/next/recommended',
   ],
   rules: {
     'react-compiler/react-compiler': 'error',
