@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-var-requires */
-const _ = require('lodash');
-const { NhostClient } = require('@nhost/nhost-js');
+import { type CodegenConfig } from '@graphql-codegen/cli';
+import { NhostClient } from '@nhost/nhost-js';
+import { merge } from 'lodash';
 
 const nhost = new NhostClient({
   subdomain: process.env.NHOST_SUBDOMAIN ?? 'local',
@@ -11,7 +10,7 @@ const nhost = new NhostClient({
 
 const graphqlUrl = nhost.graphql.httpUrl;
 
-const ts = {
+const ts: CodegenConfig['generates'][number] = {
   plugins: [
     'typescript',
     'typescript-operations',
@@ -47,7 +46,7 @@ const ts = {
   },
 };
 
-module.exports = {
+const config: CodegenConfig = {
   overwrite: true,
   hooks: {
     afterAllFileWrite: ['prettier --write'],
@@ -63,7 +62,7 @@ module.exports = {
   ],
   documents: ['./src/**/*.graphql'],
   generates: {
-    './src/generated/graphql.ts': _.merge({}, ts, {
+    './src/generated/graphql.ts': merge({}, ts, {
       plugins: [
         'typescript',
         'typescript-operations',
@@ -83,3 +82,5 @@ module.exports = {
     }),
   },
 };
+
+export default config;

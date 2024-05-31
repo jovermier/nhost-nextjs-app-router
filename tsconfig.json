@@ -42,6 +42,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".eslintrc.cjs",
+    "codegen.ts",
     "./*.cjs",
     "./*.js"
   ],

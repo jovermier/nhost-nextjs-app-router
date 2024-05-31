@@ -8,7 +8,7 @@
     "devi": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
-    "codegen": "env-cmd -f .env.development --silent graphql-codegen --config codegen.cjs",
+    "codegen": "env-cmd -f .env.development --silent graphql-codegen --config codegen.ts",
     "lint": "next lint",
     "lint:fix": "eslint --fix \"./src/**/*.{ts,tsx,js,jsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
