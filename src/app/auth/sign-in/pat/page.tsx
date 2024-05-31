@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import Input from '@components/input'
-import SubmitButton from '@components/submit-button'
-import { signInWithPAT } from '@server-actions/auth'
-import { useState } from 'react'
+import Input from '@components/input';
+import SubmitButton from '@components/submit-button';
+import { signInWithPAT } from '@server-actions/auth';
+import { useState } from 'react';
 
 export default function SignInWithPAT() {
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
   async function handleSignIn(formData: FormData) {
-    const response = await signInWithPAT(formData)
+    const response = await signInWithPAT(formData);
 
     if (response?.error) {
-      setError(response.error)
+      setError(response.error);
     }
   }
 
@@ -29,5 +29,5 @@ export default function SignInWithPAT() {
         </SubmitButton>
       </form>
     </div>
-  )
+  );
 }

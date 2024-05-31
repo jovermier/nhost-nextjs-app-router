@@ -1,11 +1,11 @@
-'use server'
+'use server';
 
-import { gql } from '@apollo/client'
-import { getNhost } from '@utils/nhost'
-import { revalidatePath } from 'next/cache'
+import { gql } from '@apollo/client';
+import { getNhost } from '@utils/nhost';
+import { revalidatePath } from 'next/cache';
 
 export const updateTodo = async (id: string, done: boolean) => {
-  const nhost = await getNhost()
+  const nhost = await getNhost();
 
   await nhost.graphql.request(
     gql`
@@ -19,9 +19,9 @@ export const updateTodo = async (id: string, done: boolean) => {
     `,
     {
       id,
-      done
-    }
-  )
+      done,
+    },
+  );
 
-  revalidatePath('/protected/todos')
-}
+  revalidatePath('/protected/todos');
+};

@@ -1,10 +1,10 @@
-'use client'
+'use client';
 
-import { signInWithGoogle } from '@server-actions/auth'
-import { useRouter } from 'next/navigation'
+import { signInWithGoogle } from '@server-actions/auth';
+import { useRouter } from 'next/navigation';
 
 export default function SignUp() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <div className="container flex justify-center">
@@ -49,5 +49,5 @@ export default function SignUp() {
         </button>
       </div>
     </div>
-  )
+  );
 }

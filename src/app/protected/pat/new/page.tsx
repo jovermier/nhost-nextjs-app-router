@@ -1,5 +1,5 @@
-import PATForm from '@components/pat-form'
-import withAuthAsync from '@utils/auth-guard'
+import PATForm from '@components/pat-form';
+import withAuthAsync from '@utils/auth-guard';
 
 const NewPat = async () => {
   return (
@@ -7,7 +7,7 @@ const NewPat = async () => {
       <h2 className="text-xl">New Personal Access Token</h2>
       <PATForm />
     </div>
-  )
-}
+  );
+};
 
-export default withAuthAsync(NewPat)
+export default withAuthAsync(NewPat);

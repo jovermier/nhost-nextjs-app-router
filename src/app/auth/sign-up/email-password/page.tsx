@@ -1,18 +1,18 @@
-'use client'
+'use client';
 
-import Input from '@components/input'
-import SubmitButton from '@components/submit-button'
-import { signUp } from '@server-actions/auth'
-import { useState } from 'react'
+import Input from '@components/input';
+import SubmitButton from '@components/submit-button';
+import { signUp } from '@server-actions/auth';
+import { useState } from 'react';
 
 export default function SignUpWithEmailAndPassword() {
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
   async function handleSignUp(formData: FormData) {
-    const response = await signUp(formData)
+    const response = await signUp(formData);
 
     if (response?.error) {
-      setError(response.error)
+      setError(response.error);
     }
   }
 
@@ -30,5 +30,5 @@ export default function SignUpWithEmailAndPassword() {
         <SubmitButton type="submit">Sign Up</SubmitButton>
       </form>
     </>
-  )
+  );
 }

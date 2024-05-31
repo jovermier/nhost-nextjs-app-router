@@ -1,2 +1,2 @@
-export { createPAT } from './create-pat'
-export { deletePAT } from './delete-pat'
+export { createPAT } from './create-pat';
+export { deletePAT } from './delete-pat';

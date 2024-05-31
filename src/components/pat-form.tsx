@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import Input from '@components/input'
-import SubmitButton from '@components/submit-button'
-import { createPAT } from '@server-actions/pat'
+import Input from '@components/input';
+import SubmitButton from '@components/submit-button';
+import { createPAT } from '@server-actions/pat';
 
 export default function PATForm() {
   return (
@@ -13,5 +13,5 @@ export default function PATForm() {
 
       <SubmitButton>Create PAT</SubmitButton>
     </form>
-  )
+  );
 }
