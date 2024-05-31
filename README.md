@@ -1,6 +1,6 @@
 # Nhost with Next.js Server Components
 
-This quickstart showcases how to correctly add authentication to a Next.js 13 project using the new App Router and Server Components. The other parts of the SDK (Storage / GraphQL/ Functions) should work the same as before.
+This quickstart showcases how to correctly add authentication to a Next.js 14 project using the new App Router and Server Components. The other parts of the SDK (Storage / GraphQL/ Functions) should work the same as before.
 
 ## Authentication
 
@@ -13,13 +13,13 @@ This quickstart showcases how to correctly add authentication to a Next.js 13 pr
    Create a middleware at the root of your project that calls the helper method `manageAuthSession`. Feel free to copy paste the the contents of the `/utils` folder to your project. The second argument for `manageAuthSession` is for handling the case where there's an error refreshing the current session with the `refreshToken` stored in the cookie.
 
    ```typescript
-   import { manageAuthSession } from '@utils/nhost'
-   import { NextRequest, NextResponse } from 'next/server'
+   import { manageAuthSession } from '@utils/nhost';
+   import { NextRequest, NextResponse } from 'next/server';
 
    export async function middleware(request: NextRequest) {
      return manageAuthSession(request, () =>
-       NextResponse.redirect(new URL('/auth/sign-in', request.url))
-     )
+       NextResponse.redirect(new URL('/auth/sign-in', request.url)),
+     );
    }
    ```
 

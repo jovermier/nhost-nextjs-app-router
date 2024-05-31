@@ -14,6 +14,7 @@ export default function Input({
 }: DetailedHTMLProps<HTMLProps<HTMLInputElement>, HTMLInputElement>) {
   const { pending } = useFormStatus();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { children, ...restOfInputProps } = rest;
 
   return (

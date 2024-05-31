@@ -1,10 +1,10 @@
-import { Request, Response } from 'express'
-import process from 'process'
+import { type Request, type Response } from 'express';
+import process from 'process';
 
-export default (req: Request, res: Response) => {
+export default function echo(req: Request, res: Response) {
   return res.status(200).json({
     headers: req.headers,
     query: req.query,
-    node: process.version
-  })
+    node: process.version,
+  });
 }

@@ -1,23 +1,34 @@
-'use client'
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+'use client';
 
-import { deletePAT } from '@server-actions/pat'
+import { deletePAT } from '@server-actions/pat';
+import { type AuthRefreshTokenTypes_Enum } from '~/generated/graphql';
 
 export interface PAT {
-  id: string
-  type: string
-  metadata: Record<string, string>
-  expiresAt: string
+  id: string;
+  type: AuthRefreshTokenTypes_Enum;
+  metadata?: jsonb | null | undefined;
+  expiresAt: string | Date;
+}
+
+type Metadata = { name: string; [key: string]: jsonb };
+
+function isMetadata(metadata: jsonb | null | undefined): metadata is Metadata {
+  return typeof metadata === 'object' && metadata !== null && 'name' in metadata;
 }
 
 export default function PatItem({ pat }: { pat: PAT }) {
   const handleDeleteTodo = async () => {
-    await deletePAT(pat.id)
-  }
+    await deletePAT(pat.id);
+  };
+
+  const metadata = isMetadata(pat.metadata) ? pat.metadata : undefined;
+  const name = metadata?.name ?? 'Unnamed';
 
   return (
     <div className="flex flex-row items-center justify-between p-2 bg-slate-100">
       <div>
-        <span className="justify-center block w-full space-x-2 rounded">{pat.metadata?.name}</span>
+        <span className="justify-center block w-full space-x-2 rounded">{name}</span>
         <span className="justify-center block w-full space-x-2 text-sm rounded">{pat.id}</span>
         <span className="justify-center block w-full space-x-2 rounded text-slate-500">
           expires on {new Date(pat.expiresAt).toLocaleDateString()}
@@ -40,5 +51,5 @@ export default function PatItem({ pat }: { pat: PAT }) {
         </svg>
       </button>
     </div>
-  )
+  );
 }

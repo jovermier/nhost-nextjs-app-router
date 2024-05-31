@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef } from 'react';
 import { NhostClient, type NhostSession, NhostProvider } from '@nhost/nextjs';
 import { NhostApolloProvider } from '@nhost/react-apollo';
 import Cookies from 'js-cookie';
@@ -44,7 +44,7 @@ export const getClientNhost = () => {
 };
 
 export function NhostClientProvider({ children }: { children: React.ReactNode }) {
-  const [nhostClientInstance, setNhostClientInstance] = useState(() => getClientNhost());
+  const nhostClientInstance = useRef(getClientNhost()).current;
 
   return (
     <NhostProvider nhost={nhostClientInstance}>

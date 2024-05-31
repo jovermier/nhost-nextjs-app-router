@@ -1,47 +1,31 @@
-import { gql } from '@apollo/client';
-import PatItem, { type PAT } from '@components/pat-item';
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import PatItem from '@components/pat-item';
 import withAuthAsync from '@utils/auth-guard';
 import { getNhost } from '@utils/nhost';
 import Link from 'next/link';
+import {
+  GetPersonalAccessTokensDocument,
+  type GetPersonalAccessTokensQuery,
+  type GetPersonalAccessTokensQueryVariables,
+} from '~/generated/graphql';
 
 const PATs = async ({ params }: { params: Record<string, string | string[] | undefined> }) => {
   const page = parseInt(params.pagination?.at(0) ?? '0');
   const nhost = await getNhost();
 
-  const {
-    data: {
-      authRefreshTokens,
-      authRefreshTokensAggregate: {
-        aggregate: { count },
-      },
-    },
-  } = await nhost.graphql.request(
-    gql`
-      query getPersonalAccessTokens($offset: Int, $limit: Int) {
-        authRefreshTokens(
-          offset: $offset
-          limit: $limit
-          order_by: { createdAt: desc }
-          where: { type: { _eq: pat } }
-        ) {
-          id
-          metadata
-          type
-          expiresAt
-        }
+  const result = await nhost.graphql.request<
+    GetPersonalAccessTokensQuery,
+    GetPersonalAccessTokensQueryVariables
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  >(GetPersonalAccessTokensDocument, {
+    offset: page * 10,
+    limit: 10,
+  });
 
-        authRefreshTokensAggregate(where: { type: { _eq: pat } }) {
-          aggregate {
-            count
-          }
-        }
-      }
-    `,
-    {
-      offset: page * 10,
-      limit: 10,
-    },
-  );
+  const authRefreshTokens = result.data?.authRefreshTokens;
+  const count = result.data?.authRefreshTokensAggregate.aggregate?.count;
 
   return (
     <div className="flex flex-col space-y-4">
@@ -58,14 +42,14 @@ const PATs = async ({ params }: { params: Record<string, string | string[] | und
       </div>
 
       <ul className="space-y-1">
-        {authRefreshTokens.map((token: PAT) => (
+        {authRefreshTokens?.map((token) => (
           <li key={token.id}>
             <PatItem pat={token} />
           </li>
         ))}
       </ul>
 
-      {count > 10 && (
+      {count && count > 10 && (
         <div className="flex justify-center space-x-2">
           {page > 0 && (
             <Link
