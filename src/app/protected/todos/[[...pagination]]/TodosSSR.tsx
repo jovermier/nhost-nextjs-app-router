@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import TodoItem from '@components/todo-item';
-import withAuthAsync from '@utils/auth-guard';
-import { getNhost } from '@utils/nhost';
+import TodoItem from '~/components/todo-item';
+import withAuthAsync from '~/utils/auth-guard';
+import { getNhost } from '~/utils/nhost';
 import { RouteRefreshButton } from './RouteRefreshButton';
 import {
   GetTodosDocument,

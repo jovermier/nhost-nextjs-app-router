@@ -2,22 +2,21 @@
 
 import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { twMerge } from 'tailwind-merge';
 
-import Input from '@components/input';
-
-const CreateTodoMutationDocument = gql`
-  mutation insertTodo($title: String!, $file_id: uuid) {
-    insert_todos_one(object: { title: $title, file_id: $file_id }) {
-      id
-    }
-  }
-`;
+import {
+  InsertTodoDocument,
+  type InsertTodoMutation,
+  type InsertTodoMutationVariables,
+} from '~/generated/graphql';
+import Input from '~/components/input';
 
 export default function TodoForm() {
   const router = useRouter();
-  const [addTodo, { loading }] = useMutation(CreateTodoMutationDocument);
+  const [addTodo, { loading }] = useMutation<InsertTodoMutation, InsertTodoMutationVariables>(
+    InsertTodoDocument,
+  );
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -27,6 +26,7 @@ export default function TodoForm() {
         variables: {
           title: formData.get('title') as string,
         },
+        refetchQueries: ['GetTodos'],
       })
         .then((res) => {
           console.log(res);

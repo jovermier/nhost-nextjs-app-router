@@ -1,7 +1,7 @@
 'use client';
 
-import Input from '@components/input';
-import { createTodo } from '@server-actions/todos';
+import Input from '~/components/input';
+import { createTodo } from '~/app/server-actions/todos';
 import SubmitButton from './submit-button';
 
 export default function TodoForm() {

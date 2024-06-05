@@ -1,6 +1,6 @@
 'use client';
 
-import { deletePAT } from '@server-actions/pat';
+import { deletePAT } from '~/app/server-actions/pat';
 import { type AuthRefreshTokenTypes_Enum } from '~/generated/graphql';
 
 export interface PAT {

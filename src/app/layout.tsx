@@ -1,13 +1,13 @@
 import dynamicImport from 'next/dynamic';
-import Navigation from '@components/navigation';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
+import Navigation from '~/components/navigation';
 import '~/styles/globals.css';
-// import NhostClientProvider from '@components/NhostReactClientProvider';
-// import NhostClientProvider from '@components/NhostNextClientProvider';
+// import NhostClientProvider from '~/components/NhostReactClientProvider';
+// import NhostClientProvider from '~/components/NhostNextClientProvider';
 
-const NhostClientProvider = dynamicImport(() => import('@components/NhostNextClientProvider'), {
+const NhostClientProvider = dynamicImport(() => import('~/components/NhostNextClientProvider'), {
   ssr: false,
 });
 

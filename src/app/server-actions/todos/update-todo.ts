@@ -1,27 +1,21 @@
 'use server';
 
-import { gql } from '@apollo/client';
-import { getNhost } from '@utils/nhost';
 import { revalidatePath } from 'next/cache';
+
+import {
+  UpdateTodoDocument,
+  type UpdateTodoMutation,
+  type UpdateTodoMutationVariables,
+} from '~/generated/graphql';
+import { getNhost } from '~/utils/nhost';
 
 export const updateTodo = async (id: string, done: boolean) => {
   const nhost = await getNhost();
 
-  await nhost.graphql.request(
-    gql`
-      mutation updateTodo($id: uuid!, $done: Boolean!) {
-        update_todos_by_pk(pk_columns: { id: $id }, _set: { done: $done }) {
-          id
-          title
-          done
-        }
-      }
-    `,
-    {
-      id,
-      done,
-    },
-  );
+  await nhost.graphql.request<UpdateTodoMutation, UpdateTodoMutationVariables>(UpdateTodoDocument, {
+    id,
+    done,
+  });
 
   revalidatePath('/protected/todos');
 };

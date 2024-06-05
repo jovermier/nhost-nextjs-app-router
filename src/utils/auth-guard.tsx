@@ -1,5 +1,6 @@
-import { getNhost } from '@utils/nhost';
 import { redirect } from 'next/navigation';
+
+import { getNhost } from '~/utils/nhost';
 
 const withAuthAsync = <P extends object>(Component: React.FunctionComponent<P>) => {
   const WrappedComponent = async (props: P) => {

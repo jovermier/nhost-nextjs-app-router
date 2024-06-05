@@ -1,4 +1,4 @@
-import { getNhost } from '@utils/nhost';
+import { getNhost } from '~/utils/nhost';
 
 export const dynamic = 'force-dynamic';
 

@@ -1,5 +1,5 @@
-import TodoForm from '@components/todo-form';
-import withAuthAsync from '@utils/auth-guard';
+import TodoForm from '~/components/todo-form';
+import withAuthAsync from '~/utils/auth-guard';
 
 const NewTodo = async () => {
   return (

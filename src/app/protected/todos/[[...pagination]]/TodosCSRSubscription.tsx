@@ -1,10 +1,10 @@
 'use client';
 
-import { useSubscription } from '@apollo/client';
-import Link from 'next/link';
-import TodoItem, { type Todo } from '@components/todo-item';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useSubscription } from '@apollo/client';
+
 import {
   SubTodosCountDocument,
   type SubTodosCountSubscription,
@@ -13,6 +13,7 @@ import {
   type SubTodosSubscription,
   type SubTodosSubscriptionVariables,
 } from '~/generated/graphql';
+import TodoItem, { type Todo } from '~/components/todo-item';
 
 const TodosCSRSubscription = () => {
   const pageString = useSearchParams().get('page');

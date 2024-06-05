@@ -1,8 +1,13 @@
 'use server';
 
-import { gql } from '@apollo/client';
-import { getNhost } from '@utils/nhost';
 import { redirect } from 'next/navigation';
+
+import {
+  InsertTodoDocument,
+  type InsertTodoMutation,
+  type InsertTodoMutationVariables,
+} from '~/generated/graphql';
+import { getNhost } from '~/utils/nhost';
 
 export const createTodo = async (formData: FormData) => {
   const nhost = await getNhost();
@@ -25,14 +30,8 @@ export const createTodo = async (formData: FormData) => {
     payload.file_id = fileMetadata?.processedFiles[0]?.id;
   }
 
-  await nhost.graphql.request(
-    gql`
-      mutation insertTodo($title: String!, $file_id: uuid) {
-        insert_todos_one(object: { title: $title, file_id: $file_id }) {
-          id
-        }
-      }
-    `,
+  await nhost.graphql.request<InsertTodoMutation, InsertTodoMutationVariables>(
+    InsertTodoDocument,
     payload,
   );
 

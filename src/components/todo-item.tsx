@@ -1,9 +1,10 @@
 'use client';
 
-import { deleteTodo, updateTodo } from '@server-actions/todos';
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
+
+import { deleteTodo, updateTodo } from '~/app/server-actions/todos';
 import { getClientNhost } from './NhostNextClientProvider';
 
 export interface Todo {

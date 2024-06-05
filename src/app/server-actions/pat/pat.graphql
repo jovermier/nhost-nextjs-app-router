@@ -1,0 +1,5 @@
+mutation DeletePersonalAccessToken($id: uuid!) {
+  deleteAuthRefreshToken(id: $id) {
+    id
+  }
+}

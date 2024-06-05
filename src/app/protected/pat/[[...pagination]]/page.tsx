@@ -1,12 +1,13 @@
-import PatItem from '@components/pat-item';
-import withAuthAsync from '@utils/auth-guard';
-import { getNhost } from '@utils/nhost';
 import Link from 'next/link';
+
 import {
   GetPersonalAccessTokensDocument,
   type GetPersonalAccessTokensQuery,
   type GetPersonalAccessTokensQueryVariables,
 } from '~/generated/graphql';
+import PatItem from '~/components/pat-item';
+import withAuthAsync from '~/utils/auth-guard';
+import { getNhost } from '~/utils/nhost';
 
 const PATs = async ({ params }: { params: Record<string, string | string[] | undefined> }) => {
   const page = parseInt(params.pagination?.at(0) ?? '0');

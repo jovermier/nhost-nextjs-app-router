@@ -33,3 +33,23 @@ subscription SubTodosCount {
     }
   }
 }
+
+mutation InsertTodo($title: String!, $file_id: uuid) {
+  insert_todos_one(object: { title: $title, file_id: $file_id }) {
+    id
+  }
+}
+
+mutation UpdateTodo($id: uuid!, $done: Boolean!) {
+  update_todos_by_pk(pk_columns: { id: $id }, _set: { done: $done }) {
+    id
+    title
+    done
+  }
+}
+
+mutation DeleteTodo($id: uuid!) {
+  delete_todos_by_pk(id: $id) {
+    id
+  }
+}

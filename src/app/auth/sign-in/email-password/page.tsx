@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-
-import Input from '@components/input';
-import SubmitButton from '@components/submit-button';
-import { signIn } from '@server-actions/auth';
-import { useNhostClient } from '@nhost/react';
 import { useRouter } from 'next/navigation';
+import { useNhostClient } from '@nhost/react';
+
+import Input from '~/components/input';
+import SubmitButton from '~/components/submit-button';
+import { signIn } from '~/app/server-actions/auth';
 
 export default function SignInWithEmailAndPassword() {
   const [error, setError] = useState('');

@@ -1,12 +1,12 @@
 'use client';
 
+import { useState, type FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
-
-import Input from '@components/input';
-import SubmitButton from '@components/submit-button';
 import { NhostClient } from '@nhost/nhost-js';
 import Cookies from 'js-cookie';
-import { useState, type FormEvent } from 'react';
+
+import Input from '~/components/input';
+import SubmitButton from '~/components/submit-button';
 import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
 
 const nhost = new NhostClient({

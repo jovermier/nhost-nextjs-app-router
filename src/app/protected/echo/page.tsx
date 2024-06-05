@@ -1,5 +1,5 @@
-import withAuth from '@utils/auth-guard';
-import { getNhost } from '@utils/nhost';
+import withAuth from '~/utils/auth-guard';
+import { getNhost } from '~/utils/nhost';
 
 type EchoResponse = {
   headers: Record<string, string>;

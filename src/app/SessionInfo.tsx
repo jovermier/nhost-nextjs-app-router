@@ -1,6 +1,6 @@
 import dynamicImport from 'next/dynamic';
 
-import { getNhost } from '@utils/nhost';
+import { getNhost } from '~/utils/nhost';
 import Claims from './Claims';
 // import { ApolloState } from './ApolloState';
 // import { UserState } from './UserState';

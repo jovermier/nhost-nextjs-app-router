@@ -13,7 +13,7 @@ This quickstart showcases how to correctly add authentication to a Next.js 14 pr
    Create a middleware at the root of your project that calls the helper method `manageAuthSession`. Feel free to copy paste the the contents of the `/utils` folder to your project. The second argument for `manageAuthSession` is for handling the case where there's an error refreshing the current session with the `refreshToken` stored in the cookie.
 
    ```typescript
-   import { manageAuthSession } from '@utils/nhost';
+   import { manageAuthSession } from '~/utils/nhost';
    import { NextRequest, NextResponse } from 'next/server';
 
    export async function middleware(request: NextRequest) {
@@ -28,7 +28,7 @@ This quickstart showcases how to correctly add authentication to a Next.js 14 pr
    To make sure only authenticated users access some Server Components, wrap them in the Higher Order Server Component `withAuthAsync`.
 
    ```typescript
-   import withAuthAsync from '@utils/auth-guard'
+   import withAuthAsync from '~/utils/auth-guard'
 
    const MyProtectedServerComponent = async () => {
      return <h2>Protected</h2>

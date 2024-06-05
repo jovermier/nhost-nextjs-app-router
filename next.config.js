@@ -8,9 +8,6 @@ const config = {
   experimental: {
     reactCompiler: true,
   },
-  compiler: {
-    removeConsole: false,
-  },
 };
 
 export default config;

@@ -1,4 +1,4 @@
-import withAuthAsync from '@utils/auth-guard';
+import withAuthAsync from '~/utils/auth-guard';
 import TodoForm from './TodoForm';
 
 const NewTodo = () => {

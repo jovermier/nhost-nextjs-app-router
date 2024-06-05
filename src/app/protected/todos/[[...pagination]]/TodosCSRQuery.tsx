@@ -1,14 +1,15 @@
 'use client';
 
-import { useQuery } from '@apollo/client';
-import Link from 'next/link';
-import TodoItem, { type Todo } from '@components/todo-item';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useQuery } from '@apollo/client';
+
 import {
   GetTodosDocument,
   type GetTodosQuery,
   type GetTodosQueryVariables,
 } from '~/generated/graphql';
+import TodoItem, { type Todo } from '~/components/todo-item';
 
 const TodosCSR = () => {
   const pageString = useSearchParams().get('page');
@@ -20,6 +21,8 @@ const TodosCSR = () => {
       limit: 10,
     },
   });
+
+  const todos = queryRes.data?.todos;
 
   const count = queryRes.data?.todos_aggregate?.aggregate?.count;
 
@@ -36,7 +39,7 @@ const TodosCSR = () => {
       </div>
 
       <ul className="space-y-1">
-        {queryRes.data?.todos?.map((todo: Todo) => (
+        {todos?.map((todo: Todo) => (
           <li key={todo.id}>
             <TodoItem todo={todo} />
           </li>

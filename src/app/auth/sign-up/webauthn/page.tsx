@@ -1,10 +1,11 @@
 'use client';
 
-import Input from '@components/input';
-import SubmitButton from '@components/submit-button';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
+import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
+
+import Input from '~/components/input';
+import SubmitButton from '~/components/submit-button';
 import { getClientNhost } from '~/components/NhostNextClientProvider';
 import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
 

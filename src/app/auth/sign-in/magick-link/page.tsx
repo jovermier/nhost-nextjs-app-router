@@ -1,8 +1,9 @@
 'use client';
 
-import Input from '@components/input';
-import SubmitButton from '@components/submit-button';
 import { useState, type FormEvent } from 'react';
+
+import Input from '~/components/input';
+import SubmitButton from '~/components/submit-button';
 import { getClientNhost } from '~/components/NhostNextClientProvider';
 
 export default function SignInMagickLink() {

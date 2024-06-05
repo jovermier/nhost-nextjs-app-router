@@ -1,24 +1,24 @@
 'use server';
 
-import { gql } from '@apollo/client';
-import { getNhost } from '@utils/nhost';
 import { revalidatePath } from 'next/cache';
+
+import { getNhost } from '~/utils/nhost';
+
+import {
+  DeletePersonalAccessTokenDocument,
+  type DeletePersonalAccessTokenMutation,
+  type DeletePersonalAccessTokenMutationVariables,
+} from '~/generated/graphql';
 
 export const deletePAT = async (id: string) => {
   const nhost = await getNhost();
 
-  await nhost.graphql.request(
-    gql`
-      mutation deletePersonalAccessToken($id: uuid!) {
-        deleteAuthRefreshToken(id: $id) {
-          id
-        }
-      }
-    `,
-    {
-      id,
-    },
-  );
+  await nhost.graphql.request<
+    DeletePersonalAccessTokenMutation,
+    DeletePersonalAccessTokenMutationVariables
+  >(DeletePersonalAccessTokenDocument, {
+    id,
+  });
 
   revalidatePath('/protected/pat');
 };

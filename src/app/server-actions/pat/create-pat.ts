@@ -1,7 +1,8 @@
 'use server';
 
-import { getNhost } from '@utils/nhost';
 import { redirect } from 'next/navigation';
+
+import { getNhost } from '~/utils/nhost';
 
 export const createPAT = async (formData: FormData) => {
   const nhost = await getNhost();

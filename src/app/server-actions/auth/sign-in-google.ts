@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { getNhost } from '@utils/nhost';
+import { getNhost } from '~/utils/nhost';
 
 export const signInWithGoogle = async () => {
   const nhost = await getNhost();

@@ -1,5 +1,5 @@
-import PATForm from '@components/pat-form';
-import withAuthAsync from '@utils/auth-guard';
+import PATForm from '~/components/pat-form';
+import withAuthAsync from '~/utils/auth-guard';
 
 const NewPat = async () => {
   return (

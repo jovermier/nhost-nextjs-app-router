@@ -1,9 +1,10 @@
 'use client';
 
-import Input from '@components/input';
-import SubmitButton from '@components/submit-button';
-import { signUp } from '@server-actions/auth';
 import { useState } from 'react';
+
+import Input from '~/components/input';
+import SubmitButton from '~/components/submit-button';
+import { signUp } from '~/app/server-actions/auth';
 
 export default function SignUpWithEmailAndPassword() {
   const [error, setError] = useState('');

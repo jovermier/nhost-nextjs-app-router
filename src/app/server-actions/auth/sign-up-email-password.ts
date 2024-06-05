@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { getNhost } from '@utils/nhost';
+import { getNhost } from '~/utils/nhost';
 import { NHOST_SESSION_KEY_SERVER } from '~/utils/nhost-constants';
 
 export const signUp = async (formData: FormData) => {

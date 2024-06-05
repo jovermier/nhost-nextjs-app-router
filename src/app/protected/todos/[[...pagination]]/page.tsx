@@ -1,11 +1,11 @@
 import dynamicImport from 'next/dynamic';
 import Link from 'next/link';
 
-import withAuthAsync from '@utils/auth-guard';
+import withAuthAsync from '~/utils/auth-guard';
+import TodoFormServer from '~/components/todo-form';
 import TodosSSR from './TodosSSR';
 import TodosCSRQuery from './TodosCSRQuery';
 import TodoFormClient from '../new-client-side/TodoForm';
-import TodoFormServer from '@components/todo-form';
 
 const TodosCSRSubscription = dynamicImport(() => import('./TodosCSRSubscription'), {
   ssr: false,

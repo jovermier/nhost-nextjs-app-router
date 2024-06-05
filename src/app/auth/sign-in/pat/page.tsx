@@ -1,9 +1,10 @@
 'use client';
 
-import Input from '@components/input';
-import SubmitButton from '@components/submit-button';
-import { signInWithPAT } from '@server-actions/auth';
 import { useState } from 'react';
+
+import Input from '~/components/input';
+import SubmitButton from '~/components/submit-button';
+import { signInWithPAT } from '~/app/server-actions/auth';
 
 export default function SignInWithPAT() {
   const [error, setError] = useState('');

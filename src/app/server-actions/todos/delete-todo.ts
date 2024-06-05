@@ -1,24 +1,20 @@
 'use server';
 
-import { gql } from '@apollo/client';
-import { getNhost } from '@utils/nhost';
 import { revalidatePath } from 'next/cache';
+
+import {
+  DeleteTodoDocument,
+  type DeleteTodoMutation,
+  type DeleteTodoMutationVariables,
+} from '~/generated/graphql';
+import { getNhost } from '~/utils/nhost';
 
 export const deleteTodo = async (id: string) => {
   const nhost = await getNhost();
 
-  await nhost.graphql.request(
-    gql`
-      mutation deleteTodo($id: uuid!) {
-        delete_todos_by_pk(id: $id) {
-          id
-        }
-      }
-    `,
-    {
-      id,
-    },
-  );
+  await nhost.graphql.request<DeleteTodoMutation, DeleteTodoMutationVariables>(DeleteTodoDocument, {
+    id,
+  });
 
   revalidatePath('/protected/todos');
 };

@@ -5535,10 +5535,54 @@ export type SubTodosCountSubscription = {
   };
 };
 
+export type InsertTodoMutationVariables = Exact<{
+  title: Scalars['String']['input'];
+  file_id?: InputMaybe<Scalars['uuid']['input']>;
+}>;
+
+export type InsertTodoMutation = {
+  __typename?: 'mutation_root';
+  insert_todos_one?: { __typename?: 'todos'; id: uuid } | null;
+};
+
+export type UpdateTodoMutationVariables = Exact<{
+  id: Scalars['uuid']['input'];
+  done: Scalars['Boolean']['input'];
+}>;
+
+export type UpdateTodoMutation = {
+  __typename?: 'mutation_root';
+  update_todos_by_pk?: { __typename?: 'todos'; id: uuid; title: string; done: boolean } | null;
+};
+
+export type DeleteTodoMutationVariables = Exact<{
+  id: Scalars['uuid']['input'];
+}>;
+
+export type DeleteTodoMutation = {
+  __typename?: 'mutation_root';
+  delete_todos_by_pk?: { __typename?: 'todos'; id: uuid } | null;
+};
+
+export type DeletePersonalAccessTokenMutationVariables = Exact<{
+  id: Scalars['uuid']['input'];
+}>;
+
+export type DeletePersonalAccessTokenMutation = {
+  __typename?: 'mutation_root';
+  deleteAuthRefreshToken?: { __typename?: 'authRefreshTokens'; id: uuid } | null;
+};
+
 export const namedOperations = {
   Query: {
     GetPersonalAccessTokens: 'GetPersonalAccessTokens',
     GetTodos: 'GetTodos',
+  },
+  Mutation: {
+    InsertTodo: 'InsertTodo',
+    UpdateTodo: 'UpdateTodo',
+    DeleteTodo: 'DeleteTodo',
+    DeletePersonalAccessToken: 'DeletePersonalAccessToken',
   },
   Subscription: {
     SubTodos: 'SubTodos',
@@ -5778,3 +5822,189 @@ export function useSubTodosCountSubscription(
 }
 export type SubTodosCountSubscriptionHookResult = ReturnType<typeof useSubTodosCountSubscription>;
 export type SubTodosCountSubscriptionResult = Apollo.SubscriptionResult<SubTodosCountSubscription>;
+export const InsertTodoDocument = gql`
+  mutation InsertTodo($title: String!, $file_id: uuid) {
+    insert_todos_one(object: { title: $title, file_id: $file_id }) {
+      id
+    }
+  }
+`;
+export type InsertTodoMutationFn = Apollo.MutationFunction<
+  InsertTodoMutation,
+  InsertTodoMutationVariables
+>;
+
+/**
+ * __useInsertTodoMutation__
+ *
+ * To run a mutation, you first call `useInsertTodoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertTodoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertTodoMutation, { data, loading, error }] = useInsertTodoMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      file_id: // value for 'file_id'
+ *   },
+ * });
+ */
+export function useInsertTodoMutation(
+  baseOptions?: Apollo.MutationHookOptions<InsertTodoMutation, InsertTodoMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<InsertTodoMutation, InsertTodoMutationVariables>(
+    InsertTodoDocument,
+    options,
+  );
+}
+export type InsertTodoMutationHookResult = ReturnType<typeof useInsertTodoMutation>;
+export type InsertTodoMutationResult = Apollo.MutationResult<InsertTodoMutation>;
+export type InsertTodoMutationOptions = Apollo.BaseMutationOptions<
+  InsertTodoMutation,
+  InsertTodoMutationVariables
+>;
+export const UpdateTodoDocument = gql`
+  mutation UpdateTodo($id: uuid!, $done: Boolean!) {
+    update_todos_by_pk(pk_columns: { id: $id }, _set: { done: $done }) {
+      id
+      title
+      done
+    }
+  }
+`;
+export type UpdateTodoMutationFn = Apollo.MutationFunction<
+  UpdateTodoMutation,
+  UpdateTodoMutationVariables
+>;
+
+/**
+ * __useUpdateTodoMutation__
+ *
+ * To run a mutation, you first call `useUpdateTodoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTodoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTodoMutation, { data, loading, error }] = useUpdateTodoMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      done: // value for 'done'
+ *   },
+ * });
+ */
+export function useUpdateTodoMutation(
+  baseOptions?: Apollo.MutationHookOptions<UpdateTodoMutation, UpdateTodoMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<UpdateTodoMutation, UpdateTodoMutationVariables>(
+    UpdateTodoDocument,
+    options,
+  );
+}
+export type UpdateTodoMutationHookResult = ReturnType<typeof useUpdateTodoMutation>;
+export type UpdateTodoMutationResult = Apollo.MutationResult<UpdateTodoMutation>;
+export type UpdateTodoMutationOptions = Apollo.BaseMutationOptions<
+  UpdateTodoMutation,
+  UpdateTodoMutationVariables
+>;
+export const DeleteTodoDocument = gql`
+  mutation DeleteTodo($id: uuid!) {
+    delete_todos_by_pk(id: $id) {
+      id
+    }
+  }
+`;
+export type DeleteTodoMutationFn = Apollo.MutationFunction<
+  DeleteTodoMutation,
+  DeleteTodoMutationVariables
+>;
+
+/**
+ * __useDeleteTodoMutation__
+ *
+ * To run a mutation, you first call `useDeleteTodoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTodoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTodoMutation, { data, loading, error }] = useDeleteTodoMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteTodoMutation(
+  baseOptions?: Apollo.MutationHookOptions<DeleteTodoMutation, DeleteTodoMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<DeleteTodoMutation, DeleteTodoMutationVariables>(
+    DeleteTodoDocument,
+    options,
+  );
+}
+export type DeleteTodoMutationHookResult = ReturnType<typeof useDeleteTodoMutation>;
+export type DeleteTodoMutationResult = Apollo.MutationResult<DeleteTodoMutation>;
+export type DeleteTodoMutationOptions = Apollo.BaseMutationOptions<
+  DeleteTodoMutation,
+  DeleteTodoMutationVariables
+>;
+export const DeletePersonalAccessTokenDocument = gql`
+  mutation DeletePersonalAccessToken($id: uuid!) {
+    deleteAuthRefreshToken(id: $id) {
+      id
+    }
+  }
+`;
+export type DeletePersonalAccessTokenMutationFn = Apollo.MutationFunction<
+  DeletePersonalAccessTokenMutation,
+  DeletePersonalAccessTokenMutationVariables
+>;
+
+/**
+ * __useDeletePersonalAccessTokenMutation__
+ *
+ * To run a mutation, you first call `useDeletePersonalAccessTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePersonalAccessTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePersonalAccessTokenMutation, { data, loading, error }] = useDeletePersonalAccessTokenMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeletePersonalAccessTokenMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeletePersonalAccessTokenMutation,
+    DeletePersonalAccessTokenMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeletePersonalAccessTokenMutation,
+    DeletePersonalAccessTokenMutationVariables
+  >(DeletePersonalAccessTokenDocument, options);
+}
+export type DeletePersonalAccessTokenMutationHookResult = ReturnType<
+  typeof useDeletePersonalAccessTokenMutation
+>;
+export type DeletePersonalAccessTokenMutationResult =
+  Apollo.MutationResult<DeletePersonalAccessTokenMutation>;
+export type DeletePersonalAccessTokenMutationOptions = Apollo.BaseMutationOptions<
+  DeletePersonalAccessTokenMutation,
+  DeletePersonalAccessTokenMutationVariables
+>;

@@ -1,4 +1,4 @@
-import { manageAuthSession } from '@utils/nhost';
+import { manageAuthSession } from '~/utils/nhost';
 
 import { type NextRequest, NextResponse } from 'next/server';
 
