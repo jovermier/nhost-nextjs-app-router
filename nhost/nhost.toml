@@ -30,7 +30,7 @@ httpPoolSize = 100
 version = 18
 
 [auth]
-version = '0.29.5'
+version = '0.31.0'
 
 [auth.elevatedPrivileges]
 mode = 'disabled'
@@ -144,7 +144,7 @@ timeout = 60000
 enabled = false
 
 [postgres]
-version = '14.11-20240429-1'
+version = '14.11-20240515-1'
 
 [provider]
 
