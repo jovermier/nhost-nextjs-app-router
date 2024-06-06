@@ -7,5 +7,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "strictNullChecks": true
-  }
+  },
+  "include": ["./", "../lib/**/*.ts"],
+  "exclude": ["node_modules"]
 }
