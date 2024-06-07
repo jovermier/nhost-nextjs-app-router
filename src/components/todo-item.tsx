@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
 import { deleteTodo, updateTodo } from '~/app/server-actions/todos';
-import { getClientNhost } from './NhostNextClientProvider';
+import { getClientNhost } from './NhostClientProvider';
 
 export interface Todo {
   id: string;

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useNhostClient } from '@nhost/react';
+import { useNhostClient } from '@nhost/nextjs';
 
 import Input from '~/components/input';
 import SubmitButton from '~/components/submit-button';

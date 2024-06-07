@@ -20,9 +20,6 @@ importers:
       '@nhost/nhost-js':
         specifier: 3.1.5
         version: 3.1.5(graphql@16.8.1)
-      '@nhost/react':
-        specifier: 3.5.2
-        version: 3.5.2(@types/react@18.3.3)(graphql@16.8.1)(react-dom@19.0.0-rc-827cbea417-20240606(react@19.0.0-rc-827cbea417-20240606))(react@19.0.0-rc-827cbea417-20240606)
       '@nhost/react-apollo':
         specifier: 12.0.2
         version: 12.0.2(@apollo/client@3.10.4(@types/react@18.3.3)(graphql-ws@5.16.0(graphql@16.8.1))(graphql@16.8.1)(react-dom@19.0.0-rc-827cbea417-20240606(react@19.0.0-rc-827cbea417-20240606))(react@19.0.0-rc-827cbea417-20240606))(@nhost/nhost-js@3.1.5(graphql@16.8.1))(@nhost/react@3.5.2(@types/react@18.3.3)(graphql@16.8.1)(react-dom@19.0.0-rc-827cbea417-20240606(react@19.0.0-rc-827cbea417-20240606))(react@19.0.0-rc-827cbea417-20240606))(graphql@16.8.1)(react-dom@19.0.0-rc-827cbea417-20240606(react@19.0.0-rc-827cbea417-20240606))(react@19.0.0-rc-827cbea417-20240606)

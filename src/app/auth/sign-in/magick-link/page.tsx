@@ -4,7 +4,7 @@ import { useState, type FormEvent } from 'react';
 
 import Input from '~/components/input';
 import SubmitButton from '~/components/submit-button';
-import { getClientNhost } from '~/components/NhostNextClientProvider';
+import { getClientNhost } from '~/components/NhostClientProvider';
 
 export default function SignInMagickLink() {
   const [email, setEmail] = useState('');

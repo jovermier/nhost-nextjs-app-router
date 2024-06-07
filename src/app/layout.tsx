@@ -1,15 +1,9 @@
-import dynamicImport from 'next/dynamic';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import Navigation from '~/components/navigation';
 import '~/styles/globals.css';
-// import NhostClientProvider from '~/components/NhostReactClientProvider';
-// import NhostClientProvider from '~/components/NhostNextClientProvider';
-
-const NhostClientProvider = dynamicImport(() => import('~/components/NhostNextClientProvider'), {
-  ssr: false,
-});
+import NhostClientProvider from '~/components/NhostClientProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
