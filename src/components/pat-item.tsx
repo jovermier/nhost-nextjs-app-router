@@ -25,11 +25,11 @@ export default function PatItem({ pat }: { pat: PAT }) {
   const name = metadata?.name ?? 'Unnamed';
 
   return (
-    <div className="flex flex-row items-center justify-between p-2 bg-slate-100">
+    <div className="flex flex-row items-center justify-between bg-slate-100 p-2">
       <div>
-        <span className="justify-center block w-full space-x-2 rounded">{name}</span>
-        <span className="justify-center block w-full space-x-2 text-sm rounded">{pat.id}</span>
-        <span className="justify-center block w-full space-x-2 rounded text-slate-500">
+        <span className="block w-full justify-center space-x-2 rounded">{name}</span>
+        <span className="block w-full justify-center space-x-2 rounded text-sm">{pat.id}</span>
+        <span className="block w-full justify-center space-x-2 rounded text-slate-500">
           expires on {new Date(pat.expiresAt).toLocaleDateString()}
         </span>
       </div>
@@ -40,7 +40,7 @@ export default function PatItem({ pat }: { pat: PAT }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6"
+          className="h-6 w-6"
         >
           <path
             strokeLinecap="round"

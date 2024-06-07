@@ -12,7 +12,8 @@
     "lint": "next lint",
     "lint:fix": "eslint --fix \"./src/**/*.{ts,tsx,js,jsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
-    "preview": "turbo build && next start"
+    "preview": "turbo build && next start",
+    "prepare": "husky"
   },
   "dependencies": {
     "@apollo/client": "3.10.4",
@@ -27,9 +28,9 @@
     "graphql": "16.8.1",
     "js-cookie": "3.0.5",
     "lodash": "4.17.21",
-    "next": "15.0.0-canary.14",
-    "react": "19.0.0-rc-1df34bdf62-20240605",
-    "react-dom": "19.0.0-rc-1df34bdf62-20240605",
+    "next": "15.0.0-canary.18",
+    "react": "19.0.0-rc-827cbea417-20240606",
+    "react-dom": "19.0.0-rc-827cbea417-20240606",
     "server-only": "0.0.1",
     "tailwind-merge": "2.3.0",
     "xstate": "4.38.3",
@@ -57,11 +58,13 @@
     "env-cmd": "10.1.0",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.5",
     "postcss": "8.4.38",
     "prettier": "3.3.1",
     "prettier-plugin-tailwindcss": "0.6.1",
     "tailwindcss": "3.4.4",
-    "turbo": "latest",
+    "turbo": "^2.0.3",
     "typescript": "5.4.5"
   },
   "packageManager": "pnpm@9.2.0"

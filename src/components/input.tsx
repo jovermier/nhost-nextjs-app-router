@@ -20,7 +20,7 @@ export default function Input({
   return (
     <div className={className}>
       {label && (
-        <label htmlFor={id} className="block mb-1 text-sm font-medium text-gray-700">
+        <label htmlFor={id} className="mb-1 block text-sm font-medium text-gray-700">
           {label}
         </label>
       )}
@@ -30,7 +30,7 @@ export default function Input({
         name={name}
         required={required}
         disabled={pending}
-        className="block w-full p-3 border rounded-md border-slate-300 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+        className="block w-full rounded-md border border-slate-300 p-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         {...restOfInputProps}
       />
     </div>

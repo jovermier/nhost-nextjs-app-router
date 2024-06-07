@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <NhostClientProvider>
           <div className="app">
             <Navigation />
-            <div className="container p-4 mx-auto mt-8 antialiased">{children}</div>
+            <div className="container mx-auto mt-8 p-4 antialiased">{children}</div>
           </div>
         </NhostClientProvider>
       </body>

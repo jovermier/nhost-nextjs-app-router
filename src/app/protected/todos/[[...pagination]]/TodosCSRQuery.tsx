@@ -28,11 +28,11 @@ const TodosCSR = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <h2 className="text-xl">CSR Todos Query ({count ?? '-'})</h2>
         <button
           onClick={() => queryRes.refetch()}
-          className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+          className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
         >
           Query Refresh
         </button>
@@ -53,7 +53,7 @@ const TodosCSR = () => {
             <Link
               prefetch={false}
               href={`/protected/todos/${page - 1}`}
-              className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
             >
               Previous
             </Link>
@@ -63,7 +63,7 @@ const TodosCSR = () => {
             <Link
               prefetch={false}
               href={`/protected/todos/${page + 1}`}
-              className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
             >
               Next
             </Link>

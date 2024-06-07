@@ -33,7 +33,7 @@ export default async function Navigation() {
   return (
     <header className="bg-indigo-600">
       <nav className="container mx-auto">
-        <div className="flex items-center justify-between w-full py-4">
+        <div className="flex w-full items-center justify-between py-4">
           <div className="flex items-center">
             <div className="ml-10 space-x-8">
               {nav.map((link) => (
@@ -56,14 +56,14 @@ export default async function Navigation() {
                 <Link
                   prefetch={false}
                   href="/auth/sign-in"
-                  className="inline-block px-4 py-2 text-base font-medium text-white bg-indigo-500 border border-transparent rounded-md hover:bg-opacity-75"
+                  className="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
                 >
                   Sign in
                 </Link>
                 <Link
                   prefetch={false}
                   href="/auth/sign-up"
-                  className="inline-block px-4 py-2 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-indigo-50"
+                  className="inline-block rounded-md border border-transparent bg-white px-4 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50"
                 >
                   Sign up
                 </Link>

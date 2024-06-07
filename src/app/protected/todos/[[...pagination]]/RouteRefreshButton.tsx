@@ -10,7 +10,7 @@ export const RouteRefreshButton = ({ children }: { children?: React.ReactNode })
       onClick={() => {
         router.refresh();
       }}
-      className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+      className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
     >
       {children ?? 'Refresh'}
     </button>

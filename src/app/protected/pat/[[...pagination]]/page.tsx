@@ -26,13 +26,13 @@ const PATs = async ({ params }: { params: Record<string, string | string[] | und
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <h2 className="text-xl">Personal Access Tokens ({count})</h2>
 
         <Link
           prefetch={false}
           href={`/protected/pat/new`}
-          className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+          className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
         >
           Add a PAT
         </Link>
@@ -52,7 +52,7 @@ const PATs = async ({ params }: { params: Record<string, string | string[] | und
             <Link
               prefetch={false}
               href={`/protected/pat/${page - 1}`}
-              className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
             >
               Previous
             </Link>
@@ -62,7 +62,7 @@ const PATs = async ({ params }: { params: Record<string, string | string[] | und
             <Link
               prefetch={false}
               href={`/protected/pat/${page + 1}`}
-              className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
             >
               Next
             </Link>

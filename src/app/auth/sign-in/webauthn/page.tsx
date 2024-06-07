@@ -39,9 +39,9 @@ export default function SignInWithSecurityKey() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-semibold text-center">Sign In</h1>
+      <h1 className="text-center text-2xl font-semibold">Sign In</h1>
 
-      {error && <p className="mt-3 font-semibold text-center text-red-500">{error}</p>}
+      {error && <p className="mt-3 text-center font-semibold text-red-500">{error}</p>}
 
       <form className="w-full max-w-lg space-y-5" onSubmit={handleSignIn}>
         <Input

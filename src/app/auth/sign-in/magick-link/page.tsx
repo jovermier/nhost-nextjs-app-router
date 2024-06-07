@@ -26,11 +26,11 @@ export default function SignInMagickLink() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-semibold text-center">Sign in with a magick link</h1>
+      <h1 className="text-center text-2xl font-semibold">Sign in with a magick link</h1>
 
-      {error && <p className="mt-3 font-semibold text-center text-red-500">{error}</p>}
+      {error && <p className="mt-3 text-center font-semibold text-red-500">{error}</p>}
       {isSuccess && (
-        <p className="mt-3 font-semibold text-center text-green-500">
+        <p className="mt-3 text-center font-semibold text-green-500">
           Click the link in the email to finish the sign in process
         </p>
       )}

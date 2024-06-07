@@ -1,5 +1,5 @@
 function AuthPage() {
-  return <h1 className="text-2xl text-center">You are logged in</h1>;
+  return <h1 className="text-center text-2xl">You are logged in</h1>;
 }
 
 export default AuthPage;

@@ -29,7 +29,7 @@ const TodosSSR = async ({ params }: { params: Record<string, string | string[] |
 
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <h2 className="text-xl">SSR Todos ({count ?? '-'})</h2>
         <RouteRefreshButton>Router Refresh</RouteRefreshButton>
       </div>
@@ -48,7 +48,7 @@ const TodosSSR = async ({ params }: { params: Record<string, string | string[] |
             <Link
               prefetch={false}
               href={`/protected/todos/${page - 1}`}
-              className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
             >
               Previous
             </Link>
@@ -58,7 +58,7 @@ const TodosSSR = async ({ params }: { params: Record<string, string | string[] |
             <Link
               prefetch={false}
               href={`/protected/todos/${page + 1}`}
-              className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+              className="rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
             >
               Next
             </Link>

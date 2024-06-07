@@ -10,31 +10,31 @@ export default function SignIn() {
   return (
     <div className="container flex justify-center">
       <div className="w-full max-w-lg space-y-5">
-        <h1 className="text-2xl font-semibold text-center">Sign In</h1>
+        <h1 className="text-center text-2xl font-semibold">Sign In</h1>
 
         <button
-          className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           onClick={() => router.push('/auth/sign-in/email-password')}
         >
           with email/password
         </button>
 
         <button
-          className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           onClick={() => router.push('/auth/sign-in/webauthn')}
         >
           with a security key
         </button>
 
         <button
-          className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           onClick={() => router.push('/auth/sign-in/magick-link')}
         >
           with a magick link
         </button>
 
         <button
-          className="inline-flex items-center justify-center w-full px-4 py-2 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-lg shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:outline-none"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           onClick={() => router.push('/auth/sign-in/pat')}
         >
           with a Personal Access Token
@@ -42,11 +42,11 @@ export default function SignIn() {
 
         <button
           type="button"
-          className="text-white w-full bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg px-5 py-2.5 text-center inline-flex items-center justify-between dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
+          className="mb-2 mr-2 inline-flex w-full items-center justify-between rounded-lg bg-[#4285F4] px-5 py-2.5 text-center font-medium text-white hover:bg-[#4285F4]/90 focus:outline-none focus:ring-4 focus:ring-[#4285F4]/50 dark:focus:ring-[#4285F4]/55"
           onClick={() => signInWithGoogle()}
         >
           <svg
-            className="w-4 h-4 mr-2 -ml-1"
+            className="-ml-1 mr-2 h-4 w-4"
             aria-hidden="true"
             focusable="false"
             data-prefix="fab"

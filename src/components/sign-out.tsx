@@ -24,7 +24,7 @@ export default function SignOut() {
   return (
     <button
       onClick={handleSignOut}
-      className="inline-block px-4 py-2 text-base font-medium text-white bg-indigo-500 border border-transparent rounded-md hover:bg-opacity-75"
+      className="inline-block rounded-md border border-transparent bg-indigo-500 px-4 py-2 text-base font-medium text-white hover:bg-opacity-75"
     >
       {name ? `Sign out ${name}` : 'Sign out (?)'}
     </button>
