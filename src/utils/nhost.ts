@@ -18,6 +18,7 @@ export const getNhost = async (request?: NextRequest) => {
     subdomain: process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN ?? 'local',
     region: process.env.NEXT_PUBLIC_NHOST_REGION,
     start: false,
+    autoRefreshToken: false,
   });
 
   const sessionCookieValue = $cookies.get(NHOST_SESSION_KEY_SERVER)?.value;
